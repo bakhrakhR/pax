@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Памятка Pax Renaissance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&amp;family=Golos+Text:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: account-book rows. A fixed rail of sections on the left, each rule as a ledger row
+     (title in the margin, text on the right); interactive helpers are the only filled panels. */
+  --paper:#eceeea; --surface:#f8f9f6; --ink:#18202b; --muted:#566070; --rule:#c9cec9;
+  --lapis:#234e9e; --lapis-soft:#dfe6f3; --gold:#b58a2a;
+  --op-rel:#2c6cb8; --op-eco:#c97a16; --op-pol:#6d3fa3; --op-mil:#8f1f2b;
+  --cath:#b58a2a; --islam:#2c7a4e; --reform:#b3342f;
+  --p-blue:#2f6fca; --p-yellow:#d9a400; --p-violet:#7a45b5; --p-green:#2f8a55;
+  --east:#161a21; --west:#ffffff; --good:#23764a; --bad:#a3312c;
+  --display:"Forum","Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Golos Text","PT Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12161d; --surface:#1a2029; --ink:#e7e9ea; --muted:#9aa5b3; --rule:#333c49;
+    --lapis:#8db0f2; --lapis-soft:#1f2b42; --gold:#d6ad4d;
+    --op-rel:#6fa5e6; --op-eco:#e7a04a; --op-pol:#b38be0; --op-mil:#e0707a;
+    --cath:#d6ad4d; --islam:#5fbf88; --reform:#e9736c;
+    --p-blue:#6aa0ee; --p-yellow:#e8c23e; --p-violet:#ad84e0; --p-green:#62c088;
+    --east:#05070a; --west:#f2f3f1; --good:#62c088; --bad:#ee8079;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12161d; --surface:#1a2029; --ink:#e7e9ea; --muted:#9aa5b3; --rule:#333c49;
+  --lapis:#8db0f2; --lapis-soft:#1f2b42; --gold:#d6ad4d;
+  --op-rel:#6fa5e6; --op-eco:#e7a04a; --op-pol:#b38be0; --op-mil:#e0707a;
+  --cath:#d6ad4d; --islam:#5fbf88; --reform:#e9736c;
+  --p-blue:#6aa0ee; --p-yellow:#e8c23e; --p-violet:#ad84e0; --p-green:#62c088;
+  --east:#05070a; --west:#f2f3f1; --good:#62c088; --bad:#ee8079;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.5 var(--body);font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.15em}
+li+li{margin-top:.3em}
+a{color:var(--lapis)}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
+svg.ic{width:1.25em;height:1.25em;vertical-align:-.26em;fill:currentColor;flex:none}
+svg.ic.big{width:2.2em;height:2.2em}
+.c-gold{color:var(--cath)}.c-green{color:var(--islam)}.c-red{color:var(--reform)}
+.c-pb{color:var(--p-blue)}.c-py{color:var(--p-yellow)}.c-pv{color:var(--p-violet)}.c-pg{color:var(--p-green)}
+.c-mut{color:var(--muted)}
+
+/* frame */
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100%}
+.rail{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:22px 14px 22px 22px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:18px}
+.brand{font-family:var(--display);font-size:26px;line-height:1.05}
+.brand small{display:block;font-family:var(--body);font-size:13px;color:var(--muted);margin-top:6px;line-height:1.35}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;text-decoration:none;color:var(--ink);font-size:16px;line-height:1.2}
+.nav a .k{width:9px;height:9px;border-radius:50%;background:var(--rule);flex:none}
+.nav a:hover{background:var(--surface)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--paper)}
+.nav a[aria-current="page"] .k{background:var(--gold)}
+.ctl{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:7px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:7px 13px;cursor:pointer;min-width:42px}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--lapis);color:var(--paper)}
+.search{width:100%;padding:9px 11px;border:1px solid var(--rule);border-radius:7px;background:var(--surface)}
+main{padding:26px clamp(16px,3.4vw,44px) 70px;max-width:1180px;width:100%}
+
+/* views */
+.view{display:none}
+.view.on{display:block}
+body.searching .view{display:block}
+body.searching .view.nohit{display:none}
+body.searching .row.nohit{display:none}
+body.searching .vh .lead, body.searching .tool, body.searching .fig.wide{display:none}
+.vh{display:grid;gap:8px;padding-bottom:18px}
+.vh h2{font-size:clamp(34px,4.4vw,50px);line-height:1}
+.lead{color:var(--muted);max-width:68ch;font-size:17.5px}
+.empty{display:none;padding:30px 0;color:var(--muted)}
+body.searching.none .empty{display:block}
+
+.row{display:grid;grid-template-columns:minmax(150px,218px) minmax(0,1fr);gap:8px 30px;padding:18px 0;border-top:1px solid var(--rule)}
+.row>h3{font-size:23px;line-height:1.12;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.rb{display:grid;gap:10px;max-width:74ch}
+.rb.w{max-width:none}
+.ref{font-family:var(--body);font-size:12.5px;color:var(--muted);border:1px solid var(--rule);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px 26px}
+.cols h4,.rb h4{font-family:var(--body);font-weight:600;font-size:15px;margin-bottom:5px}
+b,strong{font-weight:600}
+.note,.miss,.diff{padding:9px 12px 9px 14px;border-left:4px solid var(--lapis);background:var(--lapis-soft);border-radius:0 6px 6px 0}
+.miss{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--paper))}
+.diff{border-color:var(--op-pol);background:color-mix(in srgb,var(--op-pol) 11%,var(--paper))}
+.note>b:first-child,.miss>b:first-child,.diff>b:first-child{display:block;font-size:13.5px;margin-bottom:2px}
+
+/* florins and seals */
+.fl{display:inline-flex;align-items:center;justify-content:center;min-width:1.55em;height:1.55em;padding:0 .3em;border-radius:1em;background:var(--gold);color:#1b1404;font-weight:600;font-size:.84em;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);vertical-align:.06em;white-space:nowrap}
+.seal{display:inline-flex;align-items:center;gap:7px;padding:4px 11px 4px 5px;border-radius:20px;color:#fff;font-family:var(--body);font-size:13.5px;font-weight:600;line-height:1.1}
+.seal::before{content:"";width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.28);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.seal.rel{background:#2c6cb8}.seal.eco{background:#b76d10}.seal.pol{background:#6d3fa3}.seal.mil{background:#8f1f2b}
+.tag{display:inline-block;font-size:13px;border:1px solid currentColor;border-radius:4px;padding:0 6px;line-height:1.5;white-space:nowrap}
+.tag.e{background:var(--east);color:#f2f3f1;border-color:var(--east)}
+.tag.w{background:var(--west);color:#161a21;border-color:#8a9099}
+.yes{color:var(--good);font-weight:600}.no{color:var(--bad);font-weight:600}
+
+/* tables */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-weight:600;font-size:14px;border-bottom:2px solid var(--ink);vertical-align:bottom}
+tbody th{font-weight:600}
+td.c,th.c{text-align:center}
+.mx{font-size:14.5px}
+.mx tbody th{width:27%;font-weight:400}
+tbody th{min-width:8.5em}
+.mx .a{color:var(--good);font-weight:600}
+.mx .d{color:var(--lapis);font-weight:600}
+.mx .x{color:var(--muted)}
+
+/* figures */
+.fig{margin:0;display:grid;gap:8px}
+.fig figcaption{font-size:14px;color:var(--muted);max-width:74ch}
+.fig.wide{padding:14px 0 22px}
+.plate{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px;overflow-x:auto}
+.plate svg{display:block;max-width:100%;height:auto}
+
+.market{display:grid;grid-template-columns:repeat(7,minmax(74px,1fr));gap:8px;min-width:600px}
+.slot{aspect-ratio:5/7;border-radius:7px;border:1.5px solid var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:12.5px;line-height:1.2;padding:5px;background:var(--paper)}
+.slot.down{background:repeating-linear-gradient(45deg,var(--ink) 0 6px,color-mix(in srgb,var(--ink) 78%,var(--paper)) 6px 12px);color:var(--paper);border-color:var(--ink)}
+.slot.deck{border-style:dashed;color:var(--muted)}
+.slot .fl{font-size:15px}
+
+.tableau{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px 12px;align-items:start;min-width:660px}
+.tableau .hd{font-size:13.5px;color:var(--muted)}
+.tableau .hd.r{text-align:right}
+.couple{position:relative;width:104px;height:142px}
+.couple .tc{position:absolute}
+.couple .q{left:20px;top:22px;align-items:flex-end;padding-bottom:7px}
+.couple .k{left:0;top:0;z-index:1}
+.tc{width:82px;flex:none;border:1.5px solid var(--ink);border-radius:7px;aspect-ratio:5/7;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;line-height:1.2;padding:5px;background:var(--paper);position:relative}
+.tc.wb{border-top:9px solid var(--west);box-shadow:0 -1.5px 0 var(--ink)}
+.tc.eb{border-top:9px solid var(--east)}
+.tc.tile{aspect-ratio:1;border-color:var(--gold);border-width:3px}
+.tc.rep{border-style:double;border-width:5px;border-color:var(--muted)}
+.tc.board{width:118px;background:var(--ink);color:var(--paper);aspect-ratio:auto;min-height:120px}
+.stack{display:grid;gap:5px;flex:none}
+.stack .sub{font-size:11.5px;color:var(--muted);text-align:center;max-width:96px;line-height:1.2}
+.side{flex:1;display:flex;gap:8px;align-items:flex-start}
+.side.west{justify-content:flex-end}
+.arrow{align-self:center;font-size:13px;color:var(--muted);white-space:nowrap}
+
+.card-an{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:start}
+.gcard{width:230px;border:2px solid var(--ink);border-radius:12px;background:var(--paper);display:grid;grid-template-columns:54px 1fr;grid-template-rows:1fr auto;overflow:hidden;min-height:330px}
+.gcard .ban{background:var(--east);display:flex;flex-direction:column;align-items:center;gap:9px;padding:10px 0;grid-row:1}
+.gcard .ban i{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font:600 13px var(--body);font-style:normal}
+.gcard .ban .loc{background:#f2f3f1;color:#161a21;border-radius:5px;height:30px}
+.gcard .ban .pre{background:none;border:2px solid #f2f3f1;transform:rotate(45deg);border-radius:3px;width:25px;height:25px}
+.gcard .ban .pre span{transform:rotate(-45deg)}
+.gcard .art{padding:10px;display:flex;flex-direction:column;gap:8px;font-size:12.5px;line-height:1.25}
+.gcard .pic{flex:1;min-height:90px;border-radius:6px;background:repeating-linear-gradient(135deg,var(--rule) 0 8px,transparent 8px 16px)}
+.gcard .scr{border:1px dashed var(--muted);border-radius:5px;padding:5px 7px}
+.gcard .bot{grid-column:1/-1;border-top:2px solid var(--ink);display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:12.5px}
+.gcard .bomb{background:var(--islam);color:#fff;border-radius:5px;padding:3px 8px;font-weight:600}
+.n{display:inline-flex;align-items:center;justify-content:center;width:1.45em;height:1.45em;border-radius:50%;background:var(--lapis);color:var(--paper);font:600 12.5px var(--body);flex:none}
+.gcard .n{position:relative;margin-left:-4px}
+.leg{display:grid;gap:8px;padding:0;list-style:none}
+.leg li{display:grid;grid-template-columns:auto 1fr;gap:9px;margin:0}
+.shape{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1.5px solid var(--ink);flex:none}
+.shape.ci{border-radius:50%}.shape.di{transform:rotate(45deg) scale(.8)}.shape.di svg{transform:rotate(-45deg)}
+.shape.bo{border:0;position:relative}
+.shape.bo::before,.shape.bo::after{content:"";position:absolute;top:3px;bottom:3px;width:9px;border:1.5px solid var(--ink);border-radius:2px}
+.shape.bo::before{left:0}.shape.bo::after{right:0}
+.shape.bo svg{position:relative;z-index:1;background:var(--surface)}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;counter-reset:s;padding:0;list-style:none}
+.steps li{counter-increment:s;border-top:3px solid var(--ink);padding:9px 2px 0;margin:0;font-size:15px}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:30px;line-height:1;display:block;margin-bottom:4px}
+.steps li b{display:block}
+
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.case{border:1px solid var(--rule);border-top:4px solid var(--ink);border-radius:0 0 8px 8px;padding:12px 14px;background:var(--surface);display:grid;gap:7px;align-content:start}
+.case h4{font-family:var(--display);font-size:20px;font-weight:400;margin:0}
+.case.t{border-top-color:var(--gold)}.case.o{border-top-color:var(--bad)}.case.s{border-top-color:var(--lapis)}
+
+.pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.piece{border-top:1px solid var(--rule);padding-top:10px;display:grid;gap:5px;align-content:start;font-size:15px}
+.piece h4{font-family:var(--display);font-size:21px;font-weight:400;display:flex;align-items:center;gap:8px}
+
+/* tools */
+.tool{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:18px clamp(14px,2vw,22px);margin:6px 0 22px;display:grid;gap:14px}
+.tool>h3{font-size:25px}
+.tool>p{color:var(--muted);max-width:74ch;font-size:15px}
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px 28px;align-items:start}
+.fields{display:grid;gap:9px}
+.f{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;font-size:15px}
+.f small{display:block;color:var(--muted);font-size:13px;line-height:1.25}
+.step{display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:7px;overflow:hidden;background:var(--paper)}
+.step button{border:0;background:none;width:38px;height:38px;font-size:20px;cursor:pointer;line-height:1}
+.step button:hover{background:var(--lapis-soft)}
+.step output{min-width:34px;text-align:center;font-weight:600}
+select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);max-width:100%}
+.tg>.res{position:sticky;top:14px}
+.res{border-radius:9px;padding:14px 16px;background:var(--paper);border:1px solid var(--rule);display:grid;gap:9px;font-size:15.5px}
+.verdict{font-family:var(--display);font-size:27px;line-height:1.1}
+.verdict.win{color:var(--good)}.verdict.lose{color:var(--bad)}
+.res ul{display:grid;gap:5px}
+.res li{margin:0}
+.route{display:grid;gap:6px}
+.rt{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,230px);gap:10px;align-items:center;font-size:15px;padding:3px 0}
+.rt.emp{font-family:var(--display);font-size:19px;grid-template-columns:1fr}
+.rt.emp.lev::after{content:"сбор";font:600 12px var(--body);color:var(--good);border:1px solid var(--good);border-radius:4px;padding:0 6px;margin-left:8px}
+.rt.emp{display:flex;align-items:center}
+.rt.bd{padding-left:16px;border-left:2px dashed var(--rule);color:var(--muted)}
+.rt.bd.stop{border-left-color:var(--bad)}
+.vt input{width:58px;padding:6px 4px;text-align:center;border:1px solid var(--rule);border-radius:6px;background:var(--paper)}
+.vt th.pl{text-align:center;min-width:76px}
+.vt td{text-align:center;padding:5px 6px}
+.vt tbody th{font-weight:400;font-size:14.5px}
+.vt tr.sep th,.vt tr.sep td{border-top:2px solid var(--ink)}
+.vr{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.vr div{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;background:var(--paper);font-size:15px}
+.vr b{font-family:var(--display);font-weight:400;font-size:20px;display:block}
+
+.goals td:first-child{font-weight:600;width:30%}
+.mapk{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;color:var(--muted)}
+.mapk span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;border:1.5px solid var(--ink)}
+
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .rail{position:sticky;top:0;z-index:5;height:auto;background:var(--paper);border-right:0;border-bottom:1px solid var(--rule);padding:10px 16px;gap:8px}
+  .brand{font-size:20px}.brand small{display:none}
+  .nav{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:2px}
+  .nav a{white-space:nowrap;padding:7px 10px;font-size:15px}
+  .nav a .k{display:none}
+  .ctl{flex-direction:row;align-items:center;flex-wrap:wrap}
+  .ctlrow{display:flex;gap:10px;flex-wrap:wrap}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .tg>.res{position:static}
+  .card-an{grid-template-columns:minmax(0,1fr)}
+}
+@media print{
+  .rail,.tool{display:none}
+  .app{display:block}
+  .view{display:block;break-before:page}
+  .view:first-of-type{break-before:auto}
+  body{font-size:11pt;background:#fff}
+  .row{break-inside:avoid;padding:9px 0}
+  main{padding:0;max-width:none}
+}
+@media (prefers-reduced-motion:no-preference){.nav a,.seg button,.step button{transition:background-color .12s}}
+
+.banks{display:flex;gap:6px}
+.banks button{width:44px;height:44px;border-radius:8px;border:1.5px solid var(--rule);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.45}
+.banks button svg{width:24px;height:24px}
+.banks button[aria-pressed="true"]{opacity:1;border-color:currentColor;background:color-mix(in srgb,currentColor 14%,var(--surface))}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-pawn" viewBox="0 0 24 24"><path d="M12 3a3.2 3.2 0 0 1 2.2 5.5c1 .5 1.6 1.2 1.6 1.9H8.200c0-.7.6-1.400 1.600-1.900A3.2 3.200 0 0 1 12 3zM9.6 11.600h4.800c.200 3 .9 5 2.600 6.600H7c1.700-1.600 2.400-3.600 2.600-6.600zM6 19.400h12V21H6z"/></symbol>
+    <symbol id="i-rook" viewBox="0 0 24 24"><path d="M7 3h2.200v2h1.700V3h2.200v2h1.700V3H17v4.500l-1.500 1.500v6.500l1.700 2.700H6.800l1.700-2.700V9L7 7.500zM6 19.400h12V21H6z"/></symbol>
+    <symbol id="i-knight" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.200 18.200c.2-2.600 1.400-4.200 3-5.600l-2.600 1.300-2-1.300.8-3 3.200-3.400-.2-2.800 2.200 1.600c3.200.6 5 3.600 5 7.200 0 2.200-.4 4.200-1.200 6zM10.600 8.300a.8.800 0 1 0 0 1.600.8.800 0 0 0 0-1.600zM6 19.400h12V21H6z"/></symbol>
+    <symbol id="i-bishop" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.400c2.600 2.200 3.800 4.600 3.800 6.800 0 1.700-.8 3-1.900 3.800l1 5.200H9.100l1-5.200c-1.100-.8-1.900-2.100-1.900-3.800 0-2.200 1.200-4.600 3.800-6.800zM11.500 6.200v1.600h-1.400v1h1.400v2.400h1V8.800h1.400v-1h-1.400V6.200zM6 19.400h12V21H6z"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M11.400 2.600h1.200v10.200h-1.200zM10.600 5v7.400H5.400zM13.400 4c2.700 1.700 4.500 4.700 4.900 8.400h-4.900zM3.400 14h17.200l-2.200 4.400c-.3.600-.9 1-1.600 1H7.200c-.7 0-1.300-.4-1.600-1z"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.600 8l4.400 4 4-7 4 7 4.400-4-1.800 10H5.400zM5.400 19.400h13.200V21H5.400z"/></symbol>
+    <symbol id="i-cols" viewBox="0 0 24 24"><path d="M3 8.200l9-5 9 5v1.400H3zM5 10.800h2.400v6.800H5zM10.800 10.800h2.400v6.800h-2.400zM16.600 10.800H19v6.800h-2.400zM3 18.800h18V21H3z"/></symbol>
+    <symbol id="i-bomb" viewBox="0 0 24 24"><path d="M10.600 8.200a6.400 6.400 0 1 0 3.500 1l1.300-1.500-1.500-1.300-1.200 1.400a6.400 6.400 0 0 0-2.100-.4zM16.200 5.600l1.600-1.800 1 .9-1.600 1.800zM18.600 7.200l2.200-.6.3 1.200-2.200.6zM15.200 3.400l.4-2.200 1.200.2-.4 2.200z"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+<aside class="rail">
+  <div class="brand">Pax Renaissance<small>Памятка игрока по правилам v1.3 и своду сообщества v1.7</small></div>
+  <nav class="nav" id="nav" aria-label="Разделы">
+    <a href="#hod"><span class="k"></span>Ход и действия</a>
+    <a href="#karty"><span class="k"></span>Рынок и карты</a>
+    <a href="#operacii"><span class="k"></span>Операции</a>
+    <a href="#bitvy"><span class="k"></span>Битвы</a>
+    <a href="#rezhim"><span class="k"></span>Смена режима</a>
+    <a href="#razovye"><span class="k"></span>Разовые действия</a>
+    <a href="#yarmarka"><span class="k"></span>Ярмарка</a>
+    <a href="#pobeda"><span class="k"></span>Победа</a>
+    <a href="#pole"><span class="k"></span>Поле и фигуры</a>
+    <a href="#podgotovka"><span class="k"></span>Подготовка</a>
+    <a href="#nyuansy"><span class="k"></span>Легко забыть</a>
+  </nav>
+  <div class="ctlrow" style="display:grid;gap:14px">
+    <div class="ctl"><label for="q">Поиск по памятке</label>
+      <input class="search" id="q" type="search" placeholder="епископ, вассал, сбор…" autocomplete="off"></div>
+    <div class="ctl"><span id="pcl">Банки в игре: <b id="pcn">четверо</b></span>
+      <div class="banks" id="pc" role="group" aria-labelledby="pcl">
+        <button type="button" data-b="0" class="c-pb" title="Фуггер, синий" aria-label="Фуггер, синий"><svg class="ic"><use href="#i-pawn"/></svg></button>
+        <button type="button" data-b="1" class="c-py" title="Медичи, жёлтый" aria-label="Медичи, жёлтый"><svg class="ic"><use href="#i-pawn"/></svg></button>
+        <button type="button" data-b="2" class="c-pv" title="Кёр, фиолетовый" aria-label="Кёр, фиолетовый"><svg class="ic"><use href="#i-pawn"/></svg></button>
+        <button type="button" data-b="3" class="c-pg" title="Маркьонни, зелёный" aria-label="Маркьонни, зелёный"><svg class="ic"><use href="#i-pawn"/></svg></button>
+      </div></div>
+  </div>
+</aside>
+
+<main id="main">
+<p class="empty" id="empty">Ничего не найдено. Попробуйте другое слово, например «репрессии» или «королева».</p>
+
+<!-- ============ ХОД ============ -->
+<section class="view" id="hod">
+  <header class="vh"><h2>Ход и действия</h2>
+    <p class="lead">В свой ход выполните одно или два действия, затем обновите рынок. Ход идёт по часовой стрелке.</p></header>
+
+  <article class="row"><h3>Восемь действий <span class="ref">D1, с. 7</span></h3>
+    <div class="rb w">
+      <div class="tw"><table>
+        <thead><tr><th>Действие</th><th>Сколько раз за ход</th><th>Суть</th></tr></thead>
+        <tbody>
+          <tr><th>Купить карту</th><td>до 2</td><td>Открытая карта рынка идёт в руку. Комета разыгрывается сразу.</td></tr>
+          <tr><th>Разыграть карту</th><td>до 2</td><td>Карта из руки в игровую зону; разовое действие и агенты.</td></tr>
+          <tr><th>Продать карту или тайл империи</th><td>до 2</td><td><span class="fl">+2</span> из Китая, за королевскую пару <span class="fl">+4</span>.</td></tr>
+          <tr><th>Восточные операции</th><td>1</td><td>По одной операции с каждой карты справа от планшета.</td></tr>
+          <tr><th>Западные операции</th><td>1</td><td>По одной операции с каждой карты слева от планшета.</td></tr>
+          <tr><th>Восточная ярмарка</th><td>1</td><td>Сброс закрытой карты восточного ряда, вояж по чёрному пути.</td></tr>
+          <tr><th>Западная ярмарка</th><td>1</td><td>Сброс закрытой карты западного ряда, вояж по белому пути.</td></tr>
+          <tr><th>Объявить победу</th><td>1</td><td>Только по активному тайлу победы и при выполненных условиях.</td></tr>
+        </tbody></table></div>
+      <p>Минимум одно действие обязательно. Порядок любой: можно купить и сразу разыграть, запустить обе ярмарки подряд, купить комету и тут же объявить победу.</p>
+      <p class="miss"><b>Легко забыть</b>Действие нельзя выбрать, если оно ничего не меняет в игре. Операции нужна хотя бы одна допустимая цель.</p>
+    </div></article>
+
+  <article class="row"><h3>Обновление рынка <span class="ref">D2, с. 9</span></h3>
+    <div class="rb">
+      <ol>
+        <li>В каждом ряду сдвиньте карты влево на пустые места вместе с лежащими на них флоринами.</li>
+        <li>Доложите карты из колоды этого ряда, слева направо, до шести в ряду.</li>
+        <li>Карту, попавшую в крайнюю левую ячейку, переверните лицом вниз. Это новая карта ярмарки. Флорины с пустой левой ячейки кладутся на неё.</li>
+      </ol>
+      <p>Комета, доехавшая до левой ячейки, тоже переворачивается. Купить её уже нельзя, при запуске ярмарки она сбрасывается без эффекта.</p>
+      <p>Если одна колода закончилась, берите карты из другой: восточные карты могут оказаться в западном ряду и наоборот. Если пусты обе и рынок не заполнить, игра заканчивается <a href="#pobeda">победой покровителя</a>.</p>
+    </div></article>
+
+  <article class="row"><h3>Как добиться своего</h3>
+    <div class="rb w"><div class="tw"><table class="goals">
+      <tbody>
+        <tr><td>Получить флорины</td><td>Продать карту <span class="fl">+2</span>; запустить ярмарку (<span class="fl">+1</span> инициатору и по <span class="fl">1</span> за торговца на пути); операция «торговля»; операция «репрессии» <span class="fl">+1</span>; купить карту, на которой лежат флорины.</td></tr>
+        <tr><td>Забрать тайл империи</td><td>Коронация, голосование, заговор, крестьянское восстание, религиозная война. Кампания короля даёт вассала.</td></tr>
+        <tr><td>Сделать республику</td><td>Проведите смену режима против собственного короля: голосование, заговор, крестьянское восстание или религиозная война. Коронация и кампания республику не создают.</td></tr>
+        <tr><td>Поставить торговца</td><td>Агент-пешка с карты; пешка за любую смену режима; освобождение своих крепостных при смене режима.</td></tr>
+        <tr><td>Убрать чужую карту</td><td>Казнь (локации должны совпасть); вероотступничество. Заглушить, не убирая, можно епископом.</td></tr>
+        <tr><td>Убрать фигуры с поля</td><td>Осада; репрессии; пираты против пешек и пиратов; битва в меньшинстве ради размена один к одному; агент, занимающий город или границу.</td></tr>
+        <tr><td>Приблизить конец игры</td><td>Купить комету и перевернуть тайл победы. Ярмарки ускоряют прокрутку колод.</td></tr>
+      </tbody></table></div></div></article>
+</section>
+
+<!-- ============ РЫНОК И КАРТЫ ============ -->
+<section class="view" id="karty">
+  <header class="vh"><h2>Рынок и карты</h2>
+    <p class="lead">Покупка, рука, розыгрыш с агентами и продажа. Сторона игровой зоны определяется цветом знамени карты, а не её локацией.</p></header>
+
+  <figure class="fig wide"><div class="plate"><div class="market">
+      <div class="slot down">Ярмарка<br>лицом вниз<br>не продаётся</div>
+      <div class="slot">цена<span class="fl">1</span></div>
+      <div class="slot">цена<span class="fl">2</span></div>
+      <div class="slot">цена<span class="fl">3</span></div>
+      <div class="slot">цена<span class="fl">4</span></div>
+      <div class="slot">цена<span class="fl">5</span></div>
+      <div class="slot deck">колода</div>
+    </div></div>
+    <figcaption>Один ряд рынка. Цена карты равна числу карт слева от неё в этом ряду, считая закрытую карту ярмарки. На каждую из них кладётся по одному флорину.</figcaption></figure>
+
+  <article class="row"><h3>Покупка <span class="ref">E1, с. 9</span></h3>
+    <div class="rb">
+      <ul>
+        <li>Платите по <span class="fl">1</span> на каждую карту слева от покупаемой в том же ряду. Если слева пустая ячейка, флорин кладётся на карту того же столбца в другом ряду.</li>
+        <li>Флорины, лежащие на купленной карте, вы забираете. Оплатить ими саму покупку нельзя.</li>
+        <li>Положили флорин на карту рынка в этот ход: купить её в этот же ход нельзя. Запустить ярмарку можно.</li>
+        <li>Предел руки: 2 карты. С двумя картами в руке сначала разыграйте или продайте одну. Рука закрыта от соперников, флорины открыты.</li>
+        <li>Способности карт в руке не действуют.</li>
+      </ul>
+      <p class="note"><b>Комета</b>В руку не идёт и предел руки не учитывает. Сразу сбросьте её и переверните один неактивный тайл победы по своему выбору. Это обязательно.</p>
+      <p class="diff"><b>Расхождение в текстах</b>В своде сообщества сказано, что «карты в крайнем левом столбце стоят 1». Крайний левый столбец занят закрытой картой ярмарки, цена 1 у первой открытой карты. Примеры в обоих сводах считают именно так.</p>
+    </div></article>
+
+  <article class="row"><h3>Розыгрыш карты <span class="ref">E2, с. 10</span></h3>
+    <div class="rb">
+      <p>Карта с белым знаменем ложится на левый край игровой зоны, с чёрным на правый край. Затем по порядку:</p>
+      <ol>
+        <li><b>Объявите, происходит ли разовое действие</b> (свиток со значком бомбы). Оно всегда по желанию.</li>
+        <li><b>Если происходит:</b> выполните его, после чего обязательно выставьте всех агентов карты. В битве агенты (кроме епископов) сражаются, выставляются только выжившие. При смене торгового центра и коронации агенты ставятся, только если для них есть место.</li>
+        <li><b>Если не происходит:</b> агентов можно выставить всех, часть или ни одного.</li>
+      </ol>
+      <p class="miss"><b>Легко забыть</b>Когда карта уже лежит в игровой зоне, её разовое действие сгорело, а невыставленные агенты потеряны. Дальше карта и её фигуры живут независимо друг от друга.</p>
+      <p>Королевы разыгрываются только двумя способами: <a href="#razovye">коронацией</a> или старой девой под планшет.</p>
+    </div></article>
+
+  <figure class="fig wide"><div class="plate"><div class="card-an">
+      <div class="gcard" aria-hidden="true">
+        <div class="ban"><i class="loc">★</i><span class="n">1</span><i class="pre"><span>☾</span></i><span class="n">2</span><i style="background:#6d3fa3">К</i><i style="background:#8f1f2b">О</i><i style="background:#2c6cb8">И</i><span class="n">3</span></div>
+        <div class="art"><div class="pic"></div><b>Имя карты</b><div class="scr"><span class="n">4</span> Способность на свитке</div></div>
+        <div class="bot"><span class="n">5</span><span class="bomb">Джихад</span><span class="n">6</span><span class="shape di" style="width:24px;height:24px"><svg class="ic c-green"><use href="#i-bishop"/></svg></span></div>
+      </div>
+      <ol class="leg">
+        <li><span class="n">1</span><span><b>Локация.</b> Империя, где действуют агенты и операции карты. «Восток» или «Запад» означает любую империю этой половины по вашему выбору.</span></li>
+        <li><span class="n">2</span><span><b>Достижение.</b> Шесть видов: католицизм, ислам, реформация, закон, открытие, покровитель. Считаются для побед, епископ их не глушит.</span></li>
+        <li><span class="n">3</span><span><b>Операции</b> на знамени. Чёрное знамя: карта восточная, белое: западная. За ход с карты выполняется одна операция.</span></li>
+        <li><span class="n">4</span><span><b>Способность.</b> Действует постоянно, пока карта в игровой зоне и на ней нет епископа. Красный текст относится ко всем игрокам и не суммируется.</span></li>
+        <li><span class="n">5</span><span><b>Разовое действие</b> со значком бомбы. Только в момент розыгрыша.</span></li>
+        <li><span class="n">6</span><span><b>Агенты.</b> Форма под фигурой подсказывает, куда она ставится: <span class="shape ci" style="width:22px;height:22px;vertical-align:-6px"></span> в город, <span class="shape di" style="width:20px;height:20px;vertical-align:-5px"></span> на карту, две карты: на границу.</span></li>
+      </ol>
+    </div></div>
+    <figcaption>Схема восточной карты. У западных карт знамя белое, локация в правом углу.</figcaption></figure>
+
+  <article class="row"><h3>Куда ставить агентов <span class="ref">E2.2, с. 10–11</span></h3>
+    <div class="rb w"><div class="tw"><table>
+      <thead><tr><th>Агент</th><th>Куда</th><th>Если место занято</th></tr></thead>
+      <tbody>
+        <tr><th><svg class="ic"><use href="#i-bishop"/></svg> Епископ</th><td>На любую карту любой игровой зоны (в том числе на саму разыгранную) или на любой тайл империи, где бы он ни лежал. Локация цели должна совпадать с локацией разыгранной карты.</td><td>Епископ и уже стоящий там епископ убивают друг друга. Если епископа нет, а на тайле есть репрессированные, можно бесплатно убить одну такую фигуру.</td></tr>
+        <tr><th><svg class="ic"><use href="#i-knight"/></svg> Рыцарь, <svg class="ic"><use href="#i-rook"/></svg> башня</th><td>В любой город локации. Значок и цвет города не важны.</td><td>Репрессируйте стоящую там фигуру: <span class="fl">1</span> в Китай за каждую.</td></tr>
+        <tr><th><svg class="ic"><use href="#i-ship"/></svg> Пират</th><td>На морскую границу локации.</td><td>Пешка или пират на этой границе убиты, бесплатно.</td></tr>
+        <tr><th><svg class="ic"><use href="#i-pawn"/></svg> Пешка</th><td>Своего цвета, на любую границу локации, сухопутную или морскую.</td><td>Чужую пешку можно репрессировать за <span class="fl">1</span> в Китай. На границу с пиратом ставить нельзя.</td></tr>
+      </tbody></table></div>
+      <p>В торговый центр под жетоном разорения агентов ставить нельзя. Если нужных фигур не осталось в запасе, возьмите любую из репрессированных, а если и таких нет, из любого места на поле.</p>
+    </div></article>
+
+  <article class="row"><h3>Продажа <span class="ref">E3, с. 11</span></h3>
+    <div class="rb">
+      <ul>
+        <li><b>Карта</b> из руки, из игровой зоны или старая дева: <span class="fl">+2</span>. Епископы с неё сбрасываются. Способность, меняющая цену продажи, работает только при продаже из игровой зоны.</li>
+        <li><b>Король или республика:</b> <span class="fl">+2</span>. Тайл возвращается на престол королём вверх. Епископы и репрессированные остаются на нём.</li>
+        <li><b>Королевская пара:</b> только вместе, <span class="fl">+4</span>, одно действие. Королева уходит на престол с королём, брак сохраняется.</li>
+        <li><b>Сюзерен:</b> все его вассалы возвращаются на свои престолы со своими королевами, епископами и репрессированными.</li>
+      </ul>
+    </div></article>
+
+  <figure class="fig wide"><div class="plate"><div class="tableau">
+      <div class="hd">← новые западные карты и тайлы на левый край</div><div></div><div class="hd r">новые восточные на правый край →</div>
+      <div class="side west">
+        <div class="stack"><div class="tc rep">Респуб­лика</div><div class="sub">рамка из колонн</div></div>
+        <div class="stack"><div class="tc wb">Западная карта</div><div class="sub">белое знамя</div></div>
+        <div class="stack"><div class="tc tile">Король-сюзерен</div><div class="tc tile" style="margin-left:14px">Вассал</div><div class="sub">вассал под сюзереном</div></div>
+      </div>
+      <div class="stack"><div class="tc board">Планшет банкира</div><div class="tc" style="width:118px;aspect-ratio:auto;padding:8px 5px;border-style:dashed">Старая дева</div><div class="sub" style="max-width:118px">под планшетом, вне игровой зоны</div></div>
+      <div class="side">
+        <div class="stack"><div class="tc eb">Восточная карта</div><div class="sub">чёрное знамя</div></div>
+        <div class="stack"><div class="couple"><div class="tc tile k">Король</div><div class="tc eb q">Королева</div></div><div class="sub" style="max-width:104px">королевская пара</div></div>
+      </div>
+    </div></div>
+    <figcaption>Игровая зона. Планшет банкира делит её на западную и восточную части. Новые карты и полученные тайлы кладутся на внешний край своей части.</figcaption></figure>
+</section>
+<!-- ============ ОПЕРАЦИИ ============ -->
+<section class="view" id="operacii">
+  <header class="vh"><h2>Операции</h2>
+    <p class="lead">Одно действие активирует всю восточную или всю западную часть игровой зоны. С каждой карты выполняется не больше одной операции, порядок выбираете вы.</p></header>
+
+  <article class="row"><h3>Общие правила <span class="ref">E4, с. 17</span></h3>
+    <div class="rb">
+      <ul>
+        <li>Нужно выполнить хотя бы одну операцию с допустимой целью. Остальные карты можно не использовать.</li>
+        <li>Карту можно использовать один раз за ход, даже если на ней несколько значков.</li>
+        <li>Король и королева в паре считаются двумя картами: по операции с каждого. Сюзерен и каждый вассал тоже отдельные карты.</li>
+        <li>Тайл, только что полученный кампанией или голосованием, можно сразу использовать, если он лёг в активированную часть и ещё не использовался в этот ход.</li>
+        <li>Способность «бесплатная операция» экономит действие, но часть всё равно активируется не чаще раза за ход.</li>
+        <li>Цель может быть вашей собственной (фиктивный противник): можно обложить налогом свою пешку, репрессировать свою фигуру, голосовать в своей империи.</li>
+      </ul>
+      <div class="note"><b>Где действует операция</b>
+        <ul>
+          <li>Репрессии, налоги, пираты, осада: в локации карты. Пешка или пират на границе находятся сразу в обеих империях.</li>
+          <li>Кампания: в империи, соседней с локацией короля.</li>
+          <li>Казнь: против карты с той же локацией.</li>
+          <li>Торговля и голосование: на востоке или западе, как указано на самом значке.</li>
+          <li>Инквизитор: локация карты с операцией не важна.</li>
+        </ul></div>
+      <p>Локация «Восток» даёт выбрать любую из четырёх восточных империй, «Запад» любую из шести западных. Обратное тоже верно: карта с локацией «Венгрия» может казнить карту с локацией «Восток».</p>
+    </div></article>
+
+  <article class="row"><h3>Обет молчания <span class="ref">F1f–g, с. 17</span></h3>
+    <div class="rb">
+      <p>Епископ на карте, тайле империи или королевской паре отключает все операции, кроме синих, и способность на свитке. В паре замолкают и король, и королева.</p>
+      <p>Достижения продолжают считаться. Способности с невосприимчивостью к обету молчания не глушатся.</p>
+      <p class="miss"><b>Легко забыть</b>Если заглушена способность на неограниченную руку, немедленно сбросьте лишние карты до двух.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal rel">Инквизитор</span><span class="ref">F1, с. 17</span></h3>
+    <div class="rb">
+      <p>Переместите одного епископа той религии, что указана на значке. Епископ может стоять где угодно. Один из трёх ходов:</p>
+      <ul>
+        <li>на соседнюю карту или тайл в той же игровой зоне;</li>
+        <li>на любую карту или тайл с той же локацией, что у карты, где он стоит. Игровая зона любая, престол тоже подходит;</li>
+        <li>между сюзереном и любым его вассалом, или между вассалами одного сюзерена.</li>
+      </ul>
+      <p>На планшет банкира и через него ходить нельзя, поэтому между западом и востоком одной зоны епископ переходит только прыжком по совпадающей локации. С престола на престол ходить нельзя.</p>
+      <p>В точке прибытия: если там есть епископ любого цвета, оба убиты. Если епископа нет, а на тайле есть репрессированные, можно бесплатно убить одну такую фигуру.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal eco">Торговля</span><span class="ref">F2, с. 17</span></h3>
+    <div class="rb"><p>Возьмите <span class="fl">1</span> с любой карты восточного или западного ряда рынка (буква на значке), в том числе с закрытой карты ярмарки.</p></div></article>
+
+  <article class="row"><h3><span class="seal pol">Казнь</span><span class="ref">F3, с. 17</span></h3>
+    <div class="rb">
+      <p>Сбросьте одну карту или тайл империи из любой игровой зоны. Локации казнящей и казнимой карт должны совпадать. Себя карта казнить не может.</p>
+      <ul>
+        <li>Казнён тайл империи: казнившая карта тоже сбрасывается. Тайл возвращается на престол королём вверх с епископами и репрессированными. Королева сбрасывается. Вассалы уходят на свои престолы.</li>
+        <li>Казнена обычная карта: епископы с неё сбрасываются.</li>
+        <li>Казнь королевы в паре короля не затрагивает.</li>
+        <li>Старые девы лежат вне игровой зоны и казни не подлежат.</li>
+      </ul>
+      <p>Казнь не вызывает смену режима: пешку вы не ставите.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal pol">Налоги</span><span class="ref">F4, с. 17–18</span></h3>
+    <div class="rb">
+      <p>Выберите пешку на границе локации карты. В этой империи должен быть хотя бы один пустой город.</p>
+      <ol>
+        <li>Владелец пешки выбирает: заплатить <span class="fl">1</span> в Китай или репрессировать пешку (бесплатно, на тайл этой империи).</li>
+        <li>В любом случае владелец пешки ставит сбор в пустой город этой империи. Фигура берётся того типа и цвета, что нарисованы в выбранном городе.</li>
+      </ol>
+      <p class="miss"><b>Легко забыть</b>Город для сбора выбирает владелец пешки, а не тот, кто взимает налог. Облагать налогом можно и свою пешку. Пешка между востоком и западом доступна налогам с обеих сторон.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal pol">Репрессии</span><span class="ref">F5, с. 18</span></h3>
+    <div class="rb">
+      <p>Снимите с поля одну фигуру в локации карты: рыцаря, башню или пешку, смотря что нарисовано на значке. Цвет любой. Фигура ложится на тайл этой империи, где бы он ни был: на престоле, в игровой зоне, у вассала. Получите <span class="fl">+1</span> из Китая.</p>
+      <p>Каждая репрессированная фигура удорожает голосование в этой империи на 1 и усиливает будущий заговор или восстание.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal pol">Голосование</span><span class="ref">F6, с. 18</span></h3>
+    <div class="rb">
+      <p>Выберите империю востока или запада (по значку). Условия:</p>
+      <ul>
+        <li>её тайл лежит в чьей-то игровой зоне, не на престоле, и не является вассалом;</li>
+        <li>у вас строго больше пешек на границах этой империи, чем у любого другого игрока;</li>
+        <li>вы платите в Китай по <span class="fl">1</span> за каждую репрессированную фигуру на её тайле.</li>
+      </ul>
+      <p>Итог: чужой тайл переходит к вам королём вверх, свой переворачивается (король в республику или обратно). Дальше обычная <a href="#rezhim">смена режима</a>.</p>
+      <p class="note"><b>Золотая вольность</b>После успешного голосования в теократии можете снять теократию: империя становится средневековой.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal mil">Пираты</span><span class="ref">F7, с. 18–19</span></h3>
+    <div class="rb">
+      <p>Переместите пирата указанной на значке религии с морской границы локации карты на другую морскую границу той же локации или на морскую границу соседней локации.</p>
+      <p>Пешка или пират на новой границе убиты без битвы и платы. На границу с пиратом того же цвета ходить нельзя.</p>
+    </div></article>
+
+  <article class="row"><h3><span class="seal mil">Осада</span><span class="ref">F8, с. 19</span></h3>
+    <div class="rb"><p>Убейте одну башню, рыцаря или пирата любого цвета в локации карты. Без битвы и платы. Годится и против фигур в собственной империи: убрать еретиков до религиозной войны или ослабить защиту перед сменой режима.</p></div></article>
+
+  <article class="row"><h3><span class="seal mil">Кампания</span><span class="ref">F9, с. 19–20</span></h3>
+    <div class="rb"><p>Есть только на стороне короля. Начинает битву в соседней империи и делает её вассалом. Подробно в разделе <a href="#bitvy">«Битвы»</a>.</p></div></article>
+</section>
+
+<!-- ============ БИТВЫ ============ -->
+<section class="view" id="bitvy">
+  <header class="vh"><h2>Битвы</h2>
+    <p class="lead">Пять поводов для битвы и один общий механизм: фигуры убивают друг друга один к одному, потери за обе стороны назначает атакующий. Победа: выжил хотя бы один атакующий.</p></header>
+
+  <div class="tool" id="battle">
+    <h3>Помощник битвы</h3>
+    <p>Посчитайте фигуры на поле и введите числа. Помощник скажет исход и перечислит, что сделать после битвы.</p>
+    <div class="tg">
+      <div class="fields">
+        <label class="f"><span>Вид битвы</span>
+          <select id="b-type">
+            <option value="camp">Кампания короля</option>
+            <option value="consp">Заговор</option>
+            <option value="peas">Крестьянское восстание</option>
+            <option value="rel">Религиозная война</option>
+          </select></label>
+        <label class="f" id="b-tile-f"><span>Где лежит тайл атакуемой империи</span>
+          <select id="b-tile">
+            <option value="throne">На престоле</option>
+            <option value="opp">У соперника</option>
+            <option value="own">В моей игровой зоне</option>
+          </select></label>
+        <div id="b-fields" class="fields"></div>
+      </div>
+      <div class="res" id="b-res" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <article class="row"><h3>Общий порядок <span class="ref">Битва, с. 37</span></h3>
+    <div class="rb">
+      <ol>
+        <li><b>Определите стороны.</b> Все подходящие фигуры обязаны сражаться, выбрать часть нельзя.</li>
+        <li><b>Размен.</b> За каждого убитого защитника погибает один атакующий. Кто именно погиб и кто выжил, с обеих сторон решает атакующий.</li>
+        <li><b>Победа,</b> если после размена остался хотя бы один атакующий.</li>
+        <li><b>Разместите выживших пришлых:</b> агентов карты и репрессированных, участвовавших в атаке. Рыцари и башни идут в пустые города атакованной империи (значки городов не важны), пешки на пустые границы, пираты-агенты на пустые морские границы. Кому не хватило места, того бесплатно репрессируйте на тайл этой империи. Пирата без места сбросьте.</li>
+        <li><b>Итог для тайла и <a href="#rezhim">смена режима</a>.</b></li>
+      </ol>
+      <p class="miss"><b>Легко забыть</b>Фигуры не переходят из империи в империю. Рыцари короля в кампании и соседние рыцари в религиозной войне после битвы остаются в своих городах.</p>
+      <p class="note"><b>Атака в меньшинстве</b>Начать битву можно и без шансов на победу, чтобы разменять фигуры один к одному. Победы, итога для тайла и смены режима при этом нет. Уточнение из свода сообщества.</p>
+      <p>Епископы в битвах не участвуют никогда. Цвет фигур важен только в религиозной войне.</p>
+    </div></article>
+
+  <article class="row"><h3>Кто сражается</h3>
+    <div class="rb w"><div class="tw"><table class="mx">
+      <thead><tr><th>Фигуры</th><th>Кампания</th><th>Заговор</th><th>Крестьянское восстание</th><th>Религиозная война</th></tr></thead>
+      <tbody>
+        <tr><th><svg class="ic"><use href="#i-knight"/></svg> <svg class="ic"><use href="#i-rook"/></svg> в городах атакуемой империи</th><td class="d">защищают</td><td class="d">защищают</td><td class="d">защищают</td><td><span class="a">верующие атакуют</span>, <span class="d">еретики защищают</span></td></tr>
+        <tr><th><svg class="ic"><use href="#i-knight"/></svg> Рыцари в империи короля</th><td class="a">атакуют все, <span class="fl">1</span> за каждого</td><td class="x">нет</td><td class="x">нет</td><td class="x">нет</td></tr>
+        <tr><th><svg class="ic"><use href="#i-knight"/></svg> Рыцари в соседних империях</th><td class="x">нет</td><td class="x">нет</td><td class="x">нет</td><td class="a">верующие атакуют</td></tr>
+        <tr><th>Агенты карты: <svg class="ic"><use href="#i-knight"/></svg> <svg class="ic"><use href="#i-rook"/></svg> <svg class="ic"><use href="#i-ship"/></svg></th><td class="x">карты нет</td><td class="a">атакуют</td><td class="a">атакуют</td><td class="a">атакуют</td></tr>
+        <tr><th>Агент карты: <svg class="ic"><use href="#i-pawn"/></svg> пешка</th><td class="x">карты нет</td><td class="x">нет</td><td class="a">атакует</td><td class="x">нет</td></tr>
+        <tr><th><svg class="ic"><use href="#i-ship"/></svg> Пираты на границах империи</th><td class="x">нет</td><td class="a">атакуют, любой цвет</td><td class="a">атакуют, любой цвет</td><td><span class="a">верующие атакуют</span>, <span class="d">еретики защищают</span></td></tr>
+        <tr><th><svg class="ic"><use href="#i-pawn"/></svg> Ваши торговцы на границах империи</th><td class="x">нет</td><td class="x">нет</td><td class="a">атакуют</td><td class="x">нет</td></tr>
+        <tr><th>Репрессированные <svg class="ic"><use href="#i-knight"/></svg> <svg class="ic"><use href="#i-rook"/></svg> на тайле</th><td class="x">нет</td><td class="a">атакуют, любой цвет</td><td class="x">нет</td><td class="x">нет</td></tr>
+        <tr><th>Крепостные <svg class="ic"><use href="#i-pawn"/></svg> на тайле</th><td class="x">нет</td><td class="x">нет</td><td class="a">атакуют, любой цвет</td><td class="x">нет</td></tr>
+        <tr><th><svg class="ic"><use href="#i-bishop"/></svg> Епископы</th><td class="x">нет</td><td class="x">нет</td><td class="x">нет</td><td class="x">нет</td></tr>
+      </tbody></table></div></div></article>
+
+  <article class="row"><h3><span class="seal mil">Кампания</span><span class="ref">F9, с. 19–20</span></h3>
+    <div class="rb">
+      <ul>
+        <li><b>Цель:</b> империя, соседняя с империей короля, включая соседей по диагонали. Её тайл должен быть на престоле или у соперника. Против тайла в своей игровой зоне кампания запрещена, сюзерен и вассал друг на друга не ходят.</li>
+        <li><b>Атакуют</b> все рыцари любого цвета в империи короля. Платите <span class="fl">1</span> в Китай за каждого. Отправить только часть рыцарей нельзя: не хватает флоринов на всех, кампании нет.</li>
+        <li><b>Защищают</b> все рыцари и башни в городах цели. Репрессированные не участвуют ни с одной стороны.</li>
+        <li><b>Победа:</b> проигравший тайл ложится королём вверх под тайл вашего короля. Он вассал, ваш король сюзерен. Затем смена режима.</li>
+        <li>Кампанию выиграл вассал: новый вассал подчиняется тому же сюзерену.</li>
+      </ul>
+      <p>Операции и достижения вассала работают. Рыцари в завоёванную империю не переходят: в ней остаются только те, кого вы освободите при смене режима.</p>
+    </div></article>
+
+  <article class="row"><h3>Заговор <span class="ref">J1, с. 22</span></h3>
+    <div class="rb">
+      <p>Разовое действие. Битва в локации карты.</p>
+      <ul>
+        <li><b>Атакуют:</b> агенты карты, кроме епископов и пешек; все пираты на границах империи; все репрессированные рыцари и башни на её тайле, любого цвета.</li>
+        <li><b>Защищают:</b> все рыцари и башни в городах.</li>
+        <li>Репрессированные пешки в заговоре не участвуют.</li>
+      </ul>
+      <p>Епископ-агент ставится после битвы по обычным правилам. Если локация карты «Запад» или «Восток», он может встать на карту другой империи этой половины, не той, где шла битва.</p>
+    </div></article>
+
+  <article class="row"><h3>Крестьянское восстание <span class="ref">J2, с. 23</span></h3>
+    <div class="rb">
+      <p>Разовое действие. Битва в локации карты.</p>
+      <ul>
+        <li><b>Атакуют:</b> агенты карты, кроме епископов; ваши торговцы на границах империи; все пираты на её границах; все крепостные на её тайле, любого цвета.</li>
+        <li><b>Защищают:</b> все рыцари и башни в городах.</li>
+        <li>Репрессированные рыцари и башни в восстании не участвуют.</li>
+      </ul>
+      <p class="miss"><b>Легко забыть</b>Ваши торговцы на границах обязаны участвовать, даже если погибнут. Чужие торговцы на границах не участвуют. Крепостных вашего цвета может поднять на восстание любой игрок, в том числе против вашей империи.</p>
+    </div></article>
+
+  <article class="row"><h3>Религиозная война <span class="ref">K1–K2, с. 24–27</span></h3>
+    <div class="rb">
+      <p>Крестовый поход (верующие <b class="c-gold">золотые</b>), реформация (<b class="c-red">красные</b>), джихад (<b class="c-green">зелёные</b>). Фигуры двух других цветов считаются еретиками. Битва в локации карты.</p>
+      <ul>
+        <li><b>Начать нельзя,</b> если в империи нет ни одного еретика: ни в городах, ни пирата на границах.</li>
+        <li><b>Атакуют:</b> агенты карты, кроме епископов и пешек; верующие рыцари и башни в городах самой империи; верующие пираты на её границах; верующие рыцари в соседних империях, включая диагональ.</li>
+        <li><b>Защищают:</b> все еретики в городах и пираты-еретики на границах.</li>
+        <li>Репрессированные не участвуют и еретиками для запуска войны не считаются.</li>
+      </ul>
+      <p><b>Победа:</b> империя становится теократией этой религии. Положите или переверните карту территории нужной стороной. Выжившие остаются в своих городах. Дальше итог для тайла и смена режима.</p>
+      <p class="miss"><b>Легко забыть</b>Рыцари, башни, епископы и пираты никому не принадлежат. В свою войну вы забираете все подходящие по цвету фигуры, кто бы их ни выставил.</p>
+    </div></article>
+</section>
+
+<!-- ============ СМЕНА РЕЖИМА ============ -->
+<section class="view" id="rezhim">
+  <header class="vh"><h2>Смена режима</h2>
+    <p class="lead">Происходит после коронации, успешного голосования и победы в кампании, заговоре, восстании или религиозной войне. Сначала решается судьба тайла империи, затем вы получаете пешку и можете освободить репрессированных.</p></header>
+
+  <article class="row"><h3>Что происходит с тайлом <span class="ref">Смена режима, с. 36</span></h3>
+    <div class="rb w">
+      <div class="three">
+        <div class="case t"><h4>Тайл был на престоле</h4>
+          <p>Забираете короля на край своей игровой зоны: восточная империя направо, западная налево.</p>
+          <p><span class="yes">Переезжают с ним:</span> королева, епископы, репрессированные.</p></div>
+        <div class="case o"><h4>Тайл был у соперника</h4>
+          <p>Забираете его королём вверх, даже если это была республика, на край своей зоны.</p>
+          <p><span class="no">Сбрасываются:</span> королева и епископы.</p>
+          <p><span class="yes">Остаются:</span> репрессированные.</p>
+          <p>Его вассалы возвращаются на свои престолы.</p></div>
+        <div class="case s"><h4>Тайл уже ваш</h4>
+          <p>Переверните его: король становится республикой, республика королём. Переложите на край зоны.</p>
+          <p><span class="no">Сбрасываются:</span> королева и епископы.</p>
+          <p><span class="yes">Остаются:</span> репрессированные.</p>
+          <p>Его вассалы возвращаются на свои престолы. Ваш вассал, ставший целью, тоже переворачивается и уходит на край.</p></div>
+      </div>
+      <p class="note" style="max-width:74ch"><b>Кампания отличается</b>Выигранный тайл ложится не на край, а под короля-победителя как вассал, всегда королём вверх. Правила для королевы, епископов и репрессированных те же, что в первых двух столбцах. Третий столбец к кампании неприменим.</p>
+      <p style="max-width:74ch">Вассал, вернувшийся на престол из-за того, что его сюзерен потерян, сохраняет свою королеву, епископов и репрессированных.</p>
+    </div></article>
+
+  <article class="row"><h3>Пешка за смену режима <span class="ref">с. 18, 36</span></h3>
+    <div class="rb">
+      <p>По желанию поставьте одну свою пешку на любую границу этой империи.</p>
+      <ul>
+        <li>Граница с пиратом недоступна.</li>
+        <li>На границе чужая пешка: заплатите <span class="fl">1</span> в Китай и репрессируйте её на тайл этой империи.</li>
+      </ul>
+    </div></article>
+
+  <article class="row"><h3>Освобождение <span class="ref">с. 34, 36</span></h3>
+    <div class="rb">
+      <p>По желанию снимите с тайла этой империи любое число репрессированных фигур, участвовали они в битве или нет:</p>
+      <ul>
+        <li>рыцари и башни идут в пустые города империи, значки городов не важны;</li>
+        <li>пешки идут на пустые границы империи и снова становятся торговцами своих владельцев.</li>
+      </ul>
+      <p>Нет места, нет освобождения. Освободить можно и чужие фигуры: например, вернуть защитников в только что завоёванную империю.</p>
+    </div></article>
+
+  <article class="row"><h3>Что не вызывает смену режима</h3>
+    <div class="rb"><p>Казнь, продажа тайла, вероотступничество, смена торгового центра, налоги, репрессии, осада. Тайл в этих случаях возвращается на престол или остаётся на месте, пешку никто не получает.</p></div></article>
+
+  <article class="row"><h3>Королева: когда остаётся</h3>
+    <div class="rb w"><div class="tw"><table>
+      <thead><tr><th>Событие</th><th>Королева</th></tr></thead>
+      <tbody>
+        <tr><td>Пару забрали с престола сменой режима</td><td class="yes">остаётся с королём</td></tr>
+        <tr><td>Пару продали</td><td class="yes">уходит на престол с королём</td></tr>
+        <tr><td>Король сброшен вероотступничеством</td><td class="yes">уходит на престол с королём</td></tr>
+        <tr><td>Король вернулся на престол как вассал потерянного сюзерена</td><td class="yes">уходит на престол с королём</td></tr>
+        <tr><td>Тайл перешёл от одного игрока к другому</td><td class="no">сброшена</td></tr>
+        <tr><td>Король перевёрнут в республику</td><td class="no">сброшена</td></tr>
+        <tr><td>Король казнён</td><td class="no">сброшена</td></tr>
+        <tr><td>Казнена сама королева</td><td class="no">сброшена, король остаётся</td></tr>
+      </tbody></table></div></div></article>
+
+  <article class="row"><h3>Цена репрессий <span class="ref">Репрессии, с. 35</span></h3>
+    <div class="rb w"><div class="tw"><table>
+      <thead><tr><th>Причина</th><th>Флорины</th></tr></thead>
+      <tbody>
+        <tr><td>Агент занимает город или границу; пешка за смену режима занимает границу</td><td>вы платите <span class="fl">1</span> в Китай</td></tr>
+        <tr><td>Операция «репрессии»</td><td>вы получаете <span class="fl">+1</span> из Китая</td></tr>
+        <tr><td>Налоги, смена торгового центра, выжившие без места после битвы</td><td>бесплатно</td></tr>
+      </tbody></table></div>
+      <p style="max-width:74ch">Репрессировать можно рыцарей, башни и пешки. Епископов и пиратов нельзя.</p></div></article>
+</section>
+<!-- ============ РАЗОВЫЕ ДЕЙСТВИЯ ============ -->
+<section class="view" id="razovye">
+  <header class="vh"><h2>Разовые действия</h2>
+    <p class="lead">Свиток со значком бомбы внизу карты. Срабатывает только при розыгрыше карты из руки и только по вашему желанию. Заговор, восстание и религиозные войны описаны в разделе «Битвы».</p></header>
+
+  <article class="row"><h3><svg class="ic big"><use href="#i-bomb"/></svg>Шесть видов</h3>
+    <div class="rb w"><div class="tw"><table>
+      <thead><tr><th>Разовое действие</th><th>Битва</th><th>Смена режима</th><th>Агенты</th></tr></thead>
+      <tbody>
+        <tr><th>Смена торгового центра</th><td>нет</td><td>нет</td><td>ставятся, если есть место</td></tr>
+        <tr><th>Коронация</th><td>нет</td><td class="yes">да</td><td>у королев агентов нет</td></tr>
+        <tr><th>Вероотступничество</th><td>нет</td><td>нет</td><td>ставятся, даже если карта сбросит саму себя</td></tr>
+        <tr><th><a href="#bitvy">Заговор</a></th><td class="yes">да</td><td>при победе</td><td>сражаются, выжившие ставятся</td></tr>
+        <tr><th><a href="#bitvy">Крестьянское восстание</a></th><td class="yes">да</td><td>при победе</td><td>сражаются, выжившие ставятся</td></tr>
+        <tr><th><a href="#bitvy">Крестовый поход, реформация, джихад</a></th><td class="yes">да</td><td>при победе</td><td>сражаются, выжившие ставятся</td></tr>
+      </tbody></table></div></div></article>
+
+  <article class="row"><h3>Смена торгового центра <span class="ref">H1, с. 20</span></h3>
+    <div class="rb">
+      <ol>
+        <li>Снимите жетон разорения с торгового центра, названного на карте. Теперь он активен.</li>
+        <li>Положите этот жетон на прежний активный центр того же цвета.</li>
+        <li>Фигуру, стоявшую в закрытом центре, бесплатно репрессируйте на тайл её империи.</li>
+      </ol>
+      <p>Меняется только начало пути. Белый путь всегда заканчивается в Священной Римской империи, чёрный в Мамлюкском султанате. В закрытый центр нельзя ставить ни сборы, ни агентов.</p>
+      <p class="note"><b>Острова пряностей</b>Чтобы открыть этот центр, в вашей игровой зоне уже должно быть хотя бы одно достижение открытия. Значок на самой разыгрываемой карте не считается.</p>
+    </div></article>
+
+  <article class="row"><h3><svg class="ic big c-gold"><use href="#i-crown"/></svg>Коронация <span class="ref">I, с. 21</span></h3>
+    <div class="rb">
+      <p>Есть у всех королев. Король должен быть в списке женихов на карте, не женат, и его тайл лежит на престоле или в вашей игровой зоне.</p>
+      <ul>
+        <li>Положите тайл короля поверх карты королевы так, чтобы её операции и достижения были видны. Пара ложится на край вашей зоны со стороны империи короля.</li>
+        <li>Королева получает локацию своего короля. Операции у них раздельные.</li>
+        <li>Коронация вызывает <a href="#rezhim">смену режима</a>: пешка на границу и освобождение.</li>
+        <li>Коронация всегда даёт короля. Республику так не создать.</li>
+      </ul>
+      <p class="note"><b>Старая дева</b>Королеву можно разыграть без коронации: под планшет банкира. Она вне игровой зоны: операции и способность не работают, вероотступничество и казнь её не трогают. Её достижения считаются для победы, её можно продать за <span class="fl">2</span>.</p>
+    </div></article>
+
+  <article class="row"><h3>Вероотступничество <span class="ref">K3, с. 21</span></h3>
+    <div class="rb">
+      <p>На свитке указаны две религии. Проверяется игровая зона каждого игрока, включая вашу:</p>
+      <ul>
+        <li>есть карты или тайлы с достижениями <b>обеих</b> религий: игрок сбрасывает все карты и тайлы с достижением любой из этих двух религий;</li>
+        <li>есть достижения только одной из них или ни одной: игрок ничего не теряет.</li>
+      </ul>
+      <p>Запад и восток зоны считаются вместе. Старые девы не учитываются и не сбрасываются.</p>
+      <ul>
+        <li>Фигуры со сброшенных карт возвращаются в запас.</li>
+        <li>Сброшенный тайл империи уходит на престол королём вверх вместе с епископами и репрессированными. Королевская пара уходит вместе. Вассалы сюзерена возвращаются на свои престолы.</li>
+        <li>Если сбрасывается сама карта вероотступничества, она успевает выставить агентов.</li>
+      </ul>
+    </div></article>
+</section>
+
+<!-- ============ ЯРМАРКА ============ -->
+<section class="view" id="yarmarka">
+  <header class="vh"><h2>Ярмарка</h2>
+    <p class="lead">Действие: сбросить закрытую карту слева в восточном или западном ряду. Прибыль расходится по торговому пути, а империи на пути получают новые фигуры.</p></header>
+
+  <figure class="fig wide"><ol class="steps">
+      <li><b>Прибыль</b>Добавьте на закрытую карту <span class="fl" data-fair-add>2</span> из Китая. Все флорины на ней и есть прибыль.</li>
+      <li><b>Сброс</b>Уберите карту из игры. Прибыль остаётся в пустой ячейке.</li>
+      <li><b>Доля инициатора</b>Возьмите себе <span class="fl">1</span> из прибыли.</li>
+      <li><b>Вояж</b>Идите по пути от активного центра к стрелке. Торговец на границе: владельцу <span class="fl">1</span>. Пират: <span class="fl">1</span> в Китай.</li>
+      <li><b>Сборы</b>В каждой пройденной империи поставьте фигуру в пустой город.</li>
+    </ol></figure>
+
+  <div class="tool" id="fair">
+    <h3>Расчёт ярмарки</h3>
+    <p>Расставьте пешки и пиратов на границах так, как они стоят на поле. Готовые пути соответствуют началу партии: белый из Трапезунда и чёрный из Таны, со стартовыми пешками банков. После смены торгового центра сверьтесь с линией на поле и выберите «свой путь».</p>
+    <div class="tg">
+      <div class="fields">
+        <label class="f"><span>Путь</span>
+          <select id="f-route">
+            <option value="treb">Белый из Трапезунда (запад)</option>
+            <option value="tana">Чёрный из Таны (восток)</option>
+            <option value="custom">Свой путь</option>
+          </select></label>
+        <div class="f" id="f-len-f" hidden><span>Сколько границ пересекает путь</span>
+          <span class="step" data-step="f-len" data-min="1" data-max="9"><button type="button" aria-label="меньше">−</button><output id="f-len">4</output><button type="button" aria-label="больше">+</button></span></div>
+        <div class="f"><span>Флоринов уже лежит на карте ярмарки</span>
+          <span class="step" data-step="f-card" data-min="0" data-max="30"><button type="button" aria-label="меньше">−</button><output id="f-card">1</output><button type="button" aria-label="больше">+</button></span></div>
+        <label class="f"><span>Вариант «Банкротство»<small>инициатор не берёт свой флорин</small></span>
+          <input type="checkbox" id="f-bank" style="width:22px;height:22px"></label>
+        <div class="route" id="f-routebox"></div>
+      </div>
+      <div class="res" id="f-res" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <article class="row"><h3>Прибыль и вояж <span class="ref">G1–G3, с. 12</span></h3>
+    <div class="rb">
+      <ul>
+        <li>Из Китая добавляется <span class="fl">2</span> при игре втроём и вчетвером и <span class="fl">1</span> при игре вдвоём или соло.</li>
+        <li>Флорины с карты ярмарки вы себе не забираете: они становятся общей прибылью.</li>
+        <li>Прибыль получают только торговцы на границах, которые пересекает путь. Пешка на сухопутной границе в стороне от пути не получает ничего.</li>
+        <li>Способности карт могут менять выплаты, например считать ваших торговцев дважды. Такие эффекты суммируются.</li>
+      </ul>
+      <p class="miss"><b>Пешка и пират на одной границе</b>Так бывает, только если способность защищает ваши пешки от пиратов. Тогда владелец пешки получает <span class="fl">1</span>, а пират в вояже не участвует и ничего не забирает.</p>
+    </div></article>
+
+  <article class="row"><h3>Где вояж заканчивается <span class="ref">G5, с. 12</span></h3>
+    <div class="rb">
+      <ul>
+        <li><b>Дошёл до стрелки:</b> сборы во всех империях пути. Нераспределённые флорины остаются в ячейке и лягут на новую карту ярмарки при обновлении рынка.</li>
+        <li><b>Прибыль закончилась раньше:</b> вояж обрывается на границе, где торговец или пират забрал последний флорин. Сборы проходят только в империях до этой границы. За ней сборов нет.</li>
+        <li><b>После доли инициатора прибыли не осталось:</b> вояж не начинается, нет ни выплат, ни сборов. Возможно только при игре вдвоём с пустой картой ярмарки.</li>
+        <li><b>На пути нет ни пешек, ни пиратов:</b> вы берёте свой флорин, вояж доходит до конца, сборы по всему пути.</li>
+      </ul>
+    </div></article>
+
+  <article class="row"><h3>Сборы <span class="ref">G4, с. 12</span></h3>
+    <div class="rb">
+      <ul>
+        <li>По одной фигуре в каждую пройденную империю, начиная с той, где стоит торговый центр.</li>
+        <li>Город выбирает инициатор ярмарки. Фигура берётся точно такая, как нарисована в этом городе: тип и цвет.</li>
+        <li>В заполненной империи (все города заняты) сбора нет.</li>
+        <li>Константинополь вмещает три фигуры и считается пустым, пока в нём меньше трёх.</li>
+        <li>Торговый центр под жетоном разорения сбор не принимает.</li>
+        <li>Фигур нужного вида нет в запасе: возьмите из репрессированных, а если и там нет, из любого места на поле.</li>
+      </ul>
+      <p class="note"><b>Венецианские кондотьеры</b>Некоторые способности разрешают Венеции держать двух золотых рыцарей. Пока такая карта в игре, Венеция считается пустой при одной фигуре. Способность потеряна или заглушена, либо Папская область перестала быть католической теократией: сбросьте лишнюю фигуру.</p>
+    </div></article>
+</section>
+
+<!-- ============ ПОБЕДА ============ -->
+<section class="view" id="pobeda">
+  <header class="vh"><h2>Победа</h2>
+    <p class="lead">Четыре тайла победы лежат неактивными. Покупка кометы переворачивает один из них. После этого любой игрок может потратить действие и объявить победу, если выполняет условия активного тайла.</p></header>
+
+  <article class="row"><h3>Четыре победы <span class="ref">L3–L6, с. 14</span></h3>
+    <div class="rb w">
+      <div class="three">
+        <div class="case t"><h4><svg class="ic c-gold"><use href="#i-crown"/></svg> Империализм</h4>
+          <p>Королей у вас минимум на <b data-imp>2</b> больше, чем у каждого соперника.</p>
+          <p class="c-mut">Считаются сюзерены и вассалы. Республики не считаются. При игре вдвоём нужен перевес в 3.</p></div>
+        <div class="case s"><h4><svg class="ic"><use href="#i-pawn"/></svg> Глобализация</h4>
+          <p>Торговцев на границах минимум на 2 больше, чем у каждого соперника, <b>и</b> достижений открытия больше, чем у каждого.</p>
+          <p class="c-mut">Крепостные на тайлах торговцами не считаются.</p></div>
+        <div class="case"><h4><svg class="ic"><use href="#i-cols"/></svg> Ренессанс</h4>
+          <p>Республик больше, чем у каждого соперника, <b>и</b> достижений закона минимум на 2 больше, чем у каждого.</p></div>
+        <div class="case o"><h4><svg class="ic"><use href="#i-bishop"/></svg> Священная</h4>
+          <p>Достижений верховной религии у вас больше, чем у каждого соперника.</p>
+          <p class="c-mut">Сначала проверьте, есть ли верховная религия. Условия ниже.</p></div>
+      </div>
+      <p class="diff" style="max-width:74ch"><b>Расхождение в текстах</b>В тексте свода сообщества для глобализации написано «на два значка открытий больше». На самом тайле победы и в официальных правилах: просто больше открытий. Памятка следует тайлу.</p>
+    </div></article>
+
+  <article class="row"><h3>Верховная религия <span class="ref">L3, с. 14–15</span></h3>
+    <div class="rb">
+      <p>Религия верховная, если выполнены оба условия:</p>
+      <ol>
+        <li><b>Епископы.</b> Епископов её цвета на всех картах всех игровых зон и на всех тайлах империй, включая престолы, больше, чем епископов двух других религий вместе.</li>
+        <li><b>Верующие.</b> Рыцарей, башен и пиратов её цвета в её теократиях больше, чем верующих двух других религий в их собственных теократиях вместе.</li>
+      </ol>
+      <ul>
+        <li>Считаются только фигуры, цвет которых совпадает с теократией, где они стоят. Зелёная башня в католической теократии не считается ни за кого.</li>
+        <li>Репрессированные не считаются.</li>
+        <li>Пират считается за теократию, на границе которой стоит. Между двумя теократиями своего цвета он считается дважды.</li>
+        <li>Чьи фигуры, не важно: они общие.</li>
+      </ul>
+    </div></article>
+
+  <div class="tool" id="victory">
+    <h3>Проверка победы</h3>
+    <p>Впишите, что сейчас лежит на столе. Достижения считаются на картах и тайлах в игровой зоне и на старых девах. Карты в руке не считаются.</p>
+    <div class="tw"><table class="vt" id="v-table"></table></div>
+    <div class="tg">
+      <div>
+        <h4 style="font:600 15px var(--body);margin-bottom:8px">Верховная религия: фигуры на столе</h4>
+        <div class="tw"><table class="vt" id="v-sup"></table></div>
+      </div>
+      <div class="res" id="v-sup-res" aria-live="polite"></div>
+    </div>
+    <div class="vr" id="v-res" aria-live="polite"></div>
+  </div>
+
+  <article class="row"><h3>Победа покровителя <span class="ref">L2a, с. 14</span></h3>
+    <div class="rb">
+      <p>Если при обновлении рынка обе колоды пусты и ряд не заполнить, игра сразу заканчивается. Побеждает игрок с наибольшим числом достижений покровителя.</p>
+      <p>При равенстве побеждает тот, у кого больше флоринов. Если равны и флорины, победа общая.</p>
+    </div></article>
+
+  <article class="row"><h3>Что считается <span class="ref">I2b, с. 21</span></h3>
+    <div class="rb">
+      <ul>
+        <li>Достижения на картах в игровой зоне, на тайлах королей, республик и вассалов, на королевах в парах и на старых девах.</li>
+        <li>Епископ достижения не глушит.</li>
+        <li>Объявить победу можно в тот же ход, когда вы купили комету: первое действие покупка, второе объявление.</li>
+        <li>Комета, сброшенная запуском ярмарки, тайл победы не активирует.</li>
+      </ul>
+    </div></article>
+</section>
+<!-- ============ ПОЛЕ И ФИГУРЫ ============ -->
+<section class="view" id="pole">
+  <header class="vh"><h2>Поле и фигуры</h2>
+    <p class="lead">Десять империй в два ряда, тринадцать границ между ними и два торговых пути. Рыцари, башни, епископы и пираты общие, своими у игрока бывают только пешки.</p></header>
+
+  <figure class="fig wide"><div class="plate"><svg viewBox="0 0 1024 402" width="1024" role="img" aria-label="Схема поля: десять империй, границы и два стартовых торговых пути" style="min-width:700px;font-family:var(--body)">
+<defs><marker id="ah-w" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff" stroke="#161a21" stroke-width="1.4"/></marker><marker id="ah-b" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#161a21" stroke="#f2f3f1" stroke-width="1.4"/></marker></defs>
+<rect x="12" y="12" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="24" y="40" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Англия</text>
+<rect x="220" y="12" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="232" y="40" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Франция</text>
+<rect x="428" y="12" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="440" y="40" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Священная</text>
+<text x="440" y="62" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Римская империя</text>
+<circle cx="442" cy="160" r="5" fill="#161a21" stroke="#161a21" stroke-width="1.3"/>
+<text x="451" y="165" fill="#161a21" font-size="13">☆ Новгород</text>
+<rect x="636" y="12" width="168" height="164" rx="10" fill="#161a21" stroke="#8a9099" stroke-width="1.5"/>
+<text x="648" y="40" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">Венгрия</text>
+<rect x="844" y="12" width="168" height="164" rx="10" fill="#161a21" stroke="#8a9099" stroke-width="1.5"/>
+<text x="856" y="40" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">Византия</text>
+<circle cx="858" cy="160" r="5" fill="#ffffff" stroke="#f2f3f1" stroke-width="1.3"/>
+<text x="867" y="165" fill="#f2f3f1" font-size="13">★ Трапезунд</text>
+<circle cx="858" cy="140" r="5" fill="#161a21" stroke="#f2f3f1" stroke-width="1.3"/>
+<text x="867" y="145" fill="#f2f3f1" font-size="13">★ Тана</text>
+<rect x="12" y="226" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="24" y="254" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Португалия</text>
+<circle cx="26" cy="374" r="5" fill="#ffffff" stroke="#161a21" stroke-width="1.3"/>
+<text x="35" y="379" fill="#161a21" font-size="13">☆ Острова пряностей</text>
+<rect x="220" y="226" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="232" y="254" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Арагон</text>
+<circle cx="234" cy="374" r="5" fill="#161a21" stroke="#161a21" stroke-width="1.3"/>
+<text x="243" y="379" fill="#161a21" font-size="13">☆ Тимбукту</text>
+<rect x="428" y="226" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
+<text x="440" y="254" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Папская</text>
+<text x="440" y="276" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">область</text>
+<text x="584" y="258" text-anchor="end" fill="#161a21" font-size="22">✝</text>
+<rect x="636" y="226" width="168" height="164" rx="10" fill="#161a21" stroke="#8a9099" stroke-width="1.5"/>
+<text x="648" y="254" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">Османская</text>
+<text x="648" y="276" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">империя</text>
+<rect x="844" y="226" width="168" height="164" rx="10" fill="#161a21" stroke="#8a9099" stroke-width="1.5"/>
+<text x="856" y="254" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">Мамлюкский</text>
+<text x="856" y="276" fill="#f2f3f1" font-family="Forum, Georgia, serif" font-size="20">султанат</text>
+<text x="1000" y="258" text-anchor="end" fill="#f2f3f1" font-size="22">☾</text>
+<circle cx="858" cy="374" r="5" fill="#ffffff" stroke="#f2f3f1" stroke-width="1.3"/>
+<text x="867" y="379" fill="#f2f3f1" font-size="13">☆ Красное море</text>
+<line x1="200.0" y1="24" x2="200.0" y2="164" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="408.0" y1="24" x2="408.0" y2="164" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="616.0" y1="24" x2="616.0" y2="164" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="824.0" y1="24" x2="824.0" y2="164" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="200.0" y1="238" x2="200.0" y2="378" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="408.0" y1="238" x2="408.0" y2="378" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="616.0" y1="238" x2="616.0" y2="378" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="824.0" y1="238" x2="824.0" y2="378" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="24" y1="201.0" x2="168" y2="201.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="232" y1="201.0" x2="376" y2="201.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="440" y1="201.0" x2="584" y2="201.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="648" y1="201.0" x2="792" y2="201.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<line x1="856" y1="201.0" x2="1000" y2="201.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 6"/>
+<polyline points="906,90 764,90 764,304 152,304 152,90 484,90" fill="none" stroke="#161a21" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="906,90 764,90 764,304 152,304 152,90 484,90" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-w)"/>
+<polyline points="906,112 786,112 786,326 906,326" fill="none" stroke="#f2f3f1" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="906,112 786,112 786,326 906,326" fill="none" stroke="#161a21" stroke-width="4.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-b)"/>
+<circle cx="906" cy="90" r="6.5" fill="#ffffff" stroke="#161a21" stroke-width="2"/>
+<circle cx="906" cy="112" r="6.5" fill="#161a21" stroke="#f2f3f1" stroke-width="2"/>
+<circle cx="408.0" cy="90" r="17" fill="var(--surface)" stroke="var(--p-blue)" stroke-width="2.4"/>
+<use href="#i-pawn" x="394.0" y="76.0" width="28" height="28" fill="var(--p-blue)"/>
+<text x="408.0" y="124" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" paint-order="stroke" stroke="var(--surface)" stroke-width="5" stroke-linejoin="round">Аугсбург</text>
+<circle cx="408.0" cy="304" r="17" fill="var(--surface)" stroke="var(--p-yellow)" stroke-width="2.4"/>
+<use href="#i-pawn" x="394.0" y="290.0" width="28" height="28" fill="var(--p-yellow)"/>
+<text x="408.0" y="338" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" paint-order="stroke" stroke="var(--surface)" stroke-width="5" stroke-linejoin="round">Флоренция</text>
+<circle cx="824.0" cy="326" r="17" fill="var(--surface)" stroke="var(--p-violet)" stroke-width="2.4"/>
+<use href="#i-pawn" x="810.0" y="312.0" width="28" height="28" fill="var(--p-violet)"/>
+<text x="824.0" y="360" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" paint-order="stroke" stroke="var(--surface)" stroke-width="5" stroke-linejoin="round">Александрия</text>
+<circle cx="152" cy="201.0" r="17" fill="var(--surface)" stroke="var(--p-green)" stroke-width="2.4"/>
+<use href="#i-pawn" x="138.0" y="187.0" width="28" height="28" fill="var(--p-green)"/>
+<text x="176" y="206.0" text-anchor="start" font-size="14" font-weight="600" fill="var(--ink)" paint-order="stroke" stroke="var(--surface)" stroke-width="5" stroke-linejoin="round">Лиссабон</text>
+</svg></div>
+    <div class="mapk">
+      <span><span class="tag w">запад</span> шесть империй</span>
+      <span><span class="tag e">восток</span> четыре империи</span>
+      <span><span class="dot" style="background:var(--p-blue)"></span>стартовые пешки банков</span>
+      <span>★ активный торговый центр</span>
+      <span>☆ центр под жетоном разорения</span>
+      <span>✝ ☾ теократии в начале игры</span>
+    </div>
+    <figcaption>Схема поля в начале партии. Линии показывают, какие границы пересекают два стартовых пути: белый из Трапезунда и чёрный из Таны. Точный ход остальных путей смотрите на самом поле. Города на схеме не показаны.</figcaption></figure>
+
+  <article class="row"><h3>Империи и соседство</h3>
+    <div class="rb">
+      <ul>
+        <li><span class="tag w">Запад</span> Англия, Франция, Священная Римская империя, Португалия, Арагон, Папская область.</li>
+        <li><span class="tag e">Восток</span> Венгрия, Византия, Османская империя, Мамлюкский султанат.</li>
+        <li><b>Соседи:</b> империи рядом по горизонтали, вертикали и диагонали. Франция соседствует с Англией, Священной Римской империей, Португалией, Арагоном и Папской областью.</li>
+        <li><b>Теократии в начале:</b> Папская область католическая, Мамлюкский султанат исламский. Остальные империи средневековые.</li>
+        <li><b>Локация короля и республики</b> на одном тайле одинакова, хотя значки разные.</li>
+      </ul>
+    </div></article>
+
+  <article class="row"><h3>Города и границы</h3>
+    <div class="rb">
+      <ul>
+        <li>В городе стоит одна фигура, рыцарь или башня. Константинополь вмещает три.</li>
+        <li>Значок и цвет города важны только для сборов. Агенты, выжившие в битве и освобождённые занимают любой пустой город.</li>
+        <li>Все города империи заняты: империя заполнена, сборов в ней нет, налог в ней взимать нельзя.</li>
+        <li>На границе стоит одна пешка или один пират. Фигура на границе находится в обеих империях сразу.</li>
+        <li><b>Морская граница</b> та, которую пересекает линия торгового пути, активного или нет. Пираты бывают только на морских границах, пешки на любых.</li>
+        <li>У Османской империи все три границы морские. Пешка на сухопутной границе прибыли с ярмарок не получает, но для голосования, налогов и глобализации считается.</li>
+      </ul>
+    </div></article>
+
+  <article class="row"><h3>Фигуры <span class="ref">с. 2, 38</span></h3>
+    <div class="rb w"><div class="pieces">
+      <div class="piece"><h4><svg class="ic big c-pb"><use href="#i-pawn"/></svg>Пешка</h4>
+        <p>По 10 у игрока. На границе это <b>торговец</b>, на тайле империи <b>крепостной</b>.</p>
+        <p>Получает прибыль ярмарки, даёт большинство в голосовании, считается для глобализации. Сражается только в крестьянском восстании.</p>
+        <p class="c-mut">Уязвима для налогов, репрессий и пиратов.</p></div>
+      <div class="piece"><h4><svg class="ic big c-gold"><use href="#i-knight"/></svg>Рыцарь</h4>
+        <p>10 золотых, 7 зелёных, 7 красных. Стоит в городе, входит в правящий класс.</p>
+        <p>Защищает свою империю. Атакует в кампании своего короля и в религиозной войне своей веры, в том числе из соседней империи.</p></div>
+      <div class="piece"><h4><svg class="ic big c-green"><use href="#i-rook"/></svg>Башня</h4>
+        <p>10 золотых, 7 зелёных, 7 красных. Стоит в городе, входит в правящий класс.</p>
+        <p>Защищает свою империю. Атакует только в религиозной войне своей веры внутри своей империи, а также как агент карты или репрессированная фигура в заговоре.</p></div>
+      <div class="piece"><h4><svg class="ic big c-red"><use href="#i-bishop"/></svg>Епископ</h4>
+        <p>По 5 каждого цвета. Живёт только на картах и тайлах империй, на поле не выходит.</p>
+        <p>Глушит карту обетом молчания, убивает другого епископа и репрессированных. Двигается операцией «инквизитор».</p>
+        <p class="c-mut">Не сражается, не может быть репрессирован.</p></div>
+      <div class="piece"><h4><svg class="ic big c-green"><use href="#i-ship"/></svg>Пират</h4>
+        <p>6 золотых, 4 зелёных, 3 красных. Только на морских границах.</p>
+        <p>Забирает <span class="fl">1</span> из прибыли вояжа, убивает пешку или пирата при появлении. Сражается в заговорах, восстаниях и религиозных войнах.</p>
+        <p class="c-mut">Не может быть репрессирован. Гибнет от осады и от другого пирата.</p></div>
+    </div>
+    <p style="max-width:74ch">Цвет фигуры означает религию: <b class="c-gold">золотой</b> католицизм, <b class="c-green">зелёный</b> ислам, <b class="c-red">красный</b> реформация. Количество фигур ограничено: если нужной нет, возьмите её из репрессированных, а если и там нет, из любого места. Флорины не ограничены.</p></div></article>
+
+  <article class="row"><h3>Вассал и сюзерен <span class="ref">с. 29</span></h3>
+    <div class="rb">
+      <ul>
+        <li>Вассал появляется только после победной кампании и всегда лежит королём вверх под сюзереном. У сюзерена может быть несколько вассалов.</li>
+        <li>Операции и достижения вассала ваши. Для империализма вассал считается королём.</li>
+        <li>Против вассала нельзя голосовать. Заговор, восстание, религиозная война и казнь против него возможны.</li>
+        <li>Сюзерен продан, казнён, сброшен вероотступничеством или пережил смену режима: все его вассалы возвращаются на свои престолы.</li>
+        <li>Соседи вассала в игровой зоне: карты слева и справа от сюзерена, сам сюзерен и другие его вассалы.</li>
+      </ul>
+    </div></article>
+</section>
+
+<!-- ============ ПОДГОТОВКА ============ -->
+<section class="view" id="podgotovka">
+  <header class="vh"><h2>Подготовка</h2>
+    <p class="lead">Стандартная партия начинается в 1460 году. Числа ниже пересчитываются по числу банков, отмеченных в игре.</p></header>
+
+  <article class="row"><h3>Поле <span class="ref">C1, C4, C6, с. 6–7</span></h3>
+    <div class="rb">
+      <ol>
+        <li>Десять тайлов империй на свои престолы королём вверх.</li>
+        <li>Четыре тайла победы в ячейки неактивной стороной вверх.</li>
+        <li>Жетоны разорения: чёрные на Новгород и Тимбукту, белые на Красное море и Острова пряностей. Это центры с кольцом вокруг звезды.</li>
+        <li>В столицу каждой империи (название прописными буквами) поставьте фигуру, нарисованную в ней. Остальные города пусты.</li>
+        <li>В Константинополь поставьте три фигуры: двух зелёных рыцарей и зелёную башню.</li>
+      </ol>
+    </div></article>
+
+  <article class="row"><h3>Колоды и рынок <span class="ref">C5–C6, с. 6</span></h3>
+    <div class="rb">
+      <ol>
+        <li>Разделите карты по рубашкам на восточные и западные.</li>
+        <li>Для каждой колоды: возьмите 12 случайных карт, замешайте в них 2 кометы этой колоды. Получится низ колоды из 14 карт.</li>
+        <li>Сверху положите ещё <b data-deck-top>12</b> случайных карт (по 4 на игрока). Итого в каждой колоде <b data-deck>26</b>. Остальные карты уберите в коробку.</li>
+        <li>Выложите по 6 карт в каждый ряд рынка и переверните лицом вниз самую левую, дальнюю от колоды.</li>
+      </ol>
+    </div></article>
+
+  <article class="row"><h3>Игроки <span class="ref">C2, C7, с. 7</span></h3>
+    <div class="rb w">
+      <p style="max-width:74ch">Каждый получает случайный планшет банкира, 10 пешек и 6 гербов своего цвета. Одну пешку поставьте на границу со своим гербом:</p>
+      <div class="tw"><table>
+        <thead><tr><th>Банк</th><th>Стартовая пешка</th><th>Граница</th></tr></thead>
+        <tbody>
+          <tr><th><svg class="ic c-pb"><use href="#i-pawn"/></svg> Фуггер, синий</th><td>Аугсбург</td><td>Франция и Священная Римская империя</td></tr>
+          <tr><th><svg class="ic c-py"><use href="#i-pawn"/></svg> Медичи, жёлтый</th><td>Флоренция</td><td>Арагон и Папская область</td></tr>
+          <tr><th><svg class="ic c-pv"><use href="#i-pawn"/></svg> Кёр, фиолетовый</th><td>Александрия</td><td>Османская империя и Мамлюкский султанат</td></tr>
+          <tr><th><svg class="ic c-pg"><use href="#i-pawn"/></svg> Маркьонни, зелёный</th><td>Лиссабон</td><td>Англия и Португалия</td></tr>
+        </tbody></table></div>
+      <p style="max-width:74ch"><b>Первый игрок</b> определяется случайно. Если в игре синий банк Фуггера, первым ходит он. Стартовые флорины по часовой стрелке: <span id="start-fl"></span>. Остальные флорины лежат в Китае.</p>
+    </div></article>
+
+  <article class="row"><h3>Варианты по желанию <span class="ref">с. 16</span></h3>
+    <div class="rb">
+      <ul>
+        <li><b>Банкротство.</b> Инициатор ярмарки не получает свой флорин. Игрок без флоринов, без карт на продажу и без торговцев на поле выбывает.</li>
+        <li><b>Астрология.</b> Верхняя карта каждой колоды лежит лицом вверх. Её видно, но купить нельзя.</li>
+        <li><b>Реформация 1550 года.</b> При подготовке положите на Англию и на Священную Римскую империю карты территорий стороной реформации.</li>
+        <li><b>Без поля.</b> Разложите 10 стартовых карт территорий (с ромбом у названия) в два ряда по пять.</li>
+      </ul>
+      <p>Для первой партии варианты лучше не включать.</p>
+    </div></article>
+</section>
+
+<!-- ============ ЛЕГКО ЗАБЫТЬ ============ -->
+<section class="view" id="nyuansy">
+  <header class="vh"><h2>Легко забыть</h2>
+    <p class="lead">Правила, которые чаще всего упускают в первой партии, расхождения между двумя сводами и словарь соответствия терминов.</p></header>
+
+  <article class="row"><h3>Золотое правило</h3>
+    <div class="rb"><p>Текст на карте или тайле сильнее правил. Правила сильнее любой памятки, включая эту.</p></div></article>
+
+  <article class="row"><h3>Карты и игровая зона</h3>
+    <div class="rb"><ul>
+      <li>Сторона зоны определяется цветом знамени, а не локацией. Западная карта с восточной локацией лежит слева и помогает епископам переходить между половинами.</li>
+      <li>После розыгрыша карта и выставленные ею фигуры не связаны. Убили карту: фигуры остаются. Убили фигуру: карта остаётся.</li>
+      <li>Полученный или перевёрнутый тайл империи всегда перекладывается на внешний край своей части зоны. Вассал ложится под сюзерена.</li>
+      <li>На престоле тайл лежит только королём вверх. Республика, вернувшаяся на престол, снова становится королём.</li>
+      <li>Престол хранит репрессированных, епископа и королеву, даже когда тайл никому не принадлежит.</li>
+      <li>Потеряли или заглушили способность на неограниченную руку: сразу сбросьте карты до двух.</li>
+    </ul></div></article>
+
+  <article class="row"><h3>Республика</h3>
+    <div class="rb"><ul>
+      <li>Республика появляется только когда вы проводите смену режима против короля, который уже лежит в вашей зоне: голосование, заговор, восстание, религиозная война.</li>
+      <li>Коронация и кампания республику не создают. Вассал не может быть республикой.</li>
+      <li>Смена режима против своей республики переворачивает её обратно в короля. Это способ получить ещё одну пешку.</li>
+      <li>У республик нет операции «кампания».</li>
+    </ul></div></article>
+
+  <article class="row"><h3>Битвы и фигуры</h3>
+    <div class="rb"><ul>
+      <li>Все подходящие атакующие обязаны идти в бой. В кампании платите за каждого рыцаря империи.</li>
+      <li>Никто не переезжает в другую империю из-за битвы. Двигаются только епископы (инквизитор) и пираты (операция «пираты»).</li>
+      <li>В заговоре, восстании и кампании цвет фигур не важен. В религиозной войне важен только он.</li>
+      <li>Правящий класс, епископы и пираты ничьи. Ими пользуется любой игрок.</li>
+      <li>Репрессированные фигуры переезжают вместе с тайлом империи, куда бы он ни ушёл.</li>
+      <li>Епископ, пришедший на тайл с репрессированными, может бесплатно убить одну такую фигуру. Только в момент прихода.</li>
+    </ul></div></article>
+
+  <article class="row"><h3>Деньги и рынок</h3>
+    <div class="rb"><ul>
+      <li>Закрытую карту слева купить нельзя, ею только запускают ярмарку.</li>
+      <li>При оплате покупки флорины идут на карты рынка. Все остальные траты идут в Китай.</li>
+      <li>Нельзя купить карту, на которую вы в этот ход положили флорин.</li>
+      <li>Количество флоринов у игрока открыто всем.</li>
+      <li>Сборы налога ставит владелец пешки. Сборы ярмарки ставит её инициатор.</li>
+    </ul></div></article>
+
+  <article class="row"><h3>Особые способности</h3>
+    <div class="rb"><ul>
+      <li><b>Защита пешек от пиратов.</b> Пират, пришедший на границу с такой пешкой, не убивает её и стоит рядом. В вояже он не участвует. Новую пешку на границу с пиратом по-прежнему поставить нельзя.</li>
+      <li><b>Криптография («Раскрытые шифры Медичи»).</b> Продав эту карту, выполните одну фиолетовую операцию (казнь, налоги, репрессии или голосование) с любой карты в западной части зоны соперника, как будто карта ваша. Все ограничения карты действуют: себя она не казнит, под епископом молчит, локация её собственная.</li>
+      <li><b>Красный текст</b> на свитке действует на всех игроков и не суммируется. Обычные способности суммируются.</li>
+    </ul></div></article>
+
+  <article class="row"><h3>Где своды расходятся</h3>
+    <div class="rb">
+      <p class="diff"><b>Глобализация</b>Текст сообщества требует «на два открытия больше». Тайл победы и официальные правила: просто больше открытий, чем у каждого. В памятке принят вариант тайла.</p>
+      <p class="diff"><b>Цена карт</b>Текст сообщества называет цену 1 для крайнего левого столбца. Там лежит закрытая карта ярмарки. Цена 1 у первой открытой карты.</p>
+      <p class="diff"><b>Башни в атаке</b>Справочник сообщества пишет, что в гражданских войнах и кампаниях башни только защищаются. По официальным правилам башня-агент карты атакует в заговоре и восстании, репрессированная башня атакует в заговоре. В памятке принят официальный вариант.</p>
+      <p class="diff"><b>Флорины ярмарки</b>В примере сообщества на карту добавляют 1 флорин: это пример для двоих. Втроём и вчетвером добавляют 2.</p>
+      <p class="diff"><b>Атака в меньшинстве</b>Прямо разрешена только в своде сообщества. Официальным правилам это не противоречит: разовое действие всегда по желанию, размен идёт один к одному.</p>
+    </div></article>
+
+  <article class="row"><h3>Словарь двух переводов</h3>
+    <div class="rb w"><div class="tw"><table>
+      <thead><tr><th>В памятке и у сообщества</th><th>В официальном переводе</th></tr></thead>
+      <tbody>
+        <tr><td>Торговец (пешка на границе)</td><td>Концессия</td></tr>
+        <tr><td>Пират</td><td>Корсар</td></tr>
+        <tr><td>Башня</td><td>Ладья</td></tr>
+        <tr><td>Планшет банкира</td><td>Карта игрока</td></tr>
+        <tr><td>Королевская пара</td><td>Королевская чета</td></tr>
+        <tr><td>Вероотступничество</td><td>Отступничество</td></tr>
+        <tr><td>Заполненная империя</td><td>Насыщенная</td></tr>
+        <tr><td>Фиктивный противник</td><td>Соломенная кукла</td></tr>
+        <tr><td>Торговля (операция)</td><td>Коммерция</td></tr>
+        <tr><td>Жетон разорения</td><td>Диск разорения</td></tr>
+        <tr><td>Убийство репрессированного епископом</td><td>Умиротворение</td></tr>
+        <tr><td>Епископы убивают друг друга</td><td>Диета червей</td></tr>
+      </tbody></table></div>
+      <p style="max-width:74ch" class="c-mut">Ссылки у заголовков: буква с цифрой указывает раздел официальных правил v1.3, «с.» страницу свода сообщества v1.7.</p>
+    </div></article>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ---------- pure rules logic (also exercised by tests under node) ---------- */
+var Rules = (function () {
+  // Fair: G1-G5. borders[i] = {pawn: playerIndex|null, pirate: bool}; empires.length === borders.length + 1
+  function fair(o) {
+    var add = o.players <= 2 ? 1 : 2;
+    var profit = o.onCard + add;
+    var gains = {}, china = 0, log = [];
+    var total = profit;
+    function give(p) { gains[p] = (gains[p] || 0) + 1; profit--; }
+    if (!o.bankruptcy) { give(o.initiator); log.push({ t: 'init' }); }
+    var stop = null, started = true;
+    if (profit === 0) { started = false; }
+    else {
+      for (var i = 0; i < o.borders.length; i++) {
+        var b = o.borders[i];
+        if (b.pawn !== null && b.pawn !== undefined) { give(b.pawn); log.push({ t: 'pawn', i: i, p: b.pawn }); }
+        else if (b.pirate) { profit--; china++; log.push({ t: 'pirate', i: i }); }
+        else continue;
+        if (profit === 0) { stop = i; break; }
+      }
+    }
+    var levies = [];
+    if (started) {
+      var last = stop === null ? o.empires.length - 1 : stop;
+      for (var e = 0; e <= last; e++) levies.push(e);
+    }
+    return { add: add, total: total, gains: gains, china: china, left: profit, stop: stop, started: started, levies: levies, log: log };
+  }
+
+  // Battle: attackers vs defenders, 1:1.
+  function battle(att, def) {
+    var win = att > def;
+    return { att: att, def: def, win: win, survivors: win ? att - def : 0, defLeft: win ? 0 : def - att, killed: Math.min(att, def) };
+  }
+
+  function maxOthers(arr, p) { var m = -Infinity; for (var i = 0; i < arr.length; i++) if (i !== p && arr[i] > m) m = arr[i]; return m; }
+  function winners(n, test) { var w = []; for (var p = 0; p < n; p++) if (test(p)) w.push(p); return w; }
+
+  function supreme(bishops, believers) { // arrays [cath, islam, reform]
+    for (var r = 0; r < 3; r++) {
+      var ob = 0, ov = 0;
+      for (var k = 0; k < 3; k++) if (k !== r) { ob += bishops[k]; ov += believers[k]; }
+      if (bishops[r] > ob && believers[r] > ov) return r;
+    }
+    return null;
+  }
+
+  // s: {kings[], reps[], pawns[], disc[], law[], patron[], rel:[[cath per player],[islam],[reform]]}
+  function victory(n, s, sup) {
+    return {
+      imperial: winners(n, function (p) { return s.kings[p] - maxOthers(s.kings, p) >= (n === 2 ? 3 : 2); }),
+      global: winners(n, function (p) { return s.pawns[p] - maxOthers(s.pawns, p) >= 2 && s.disc[p] > maxOthers(s.disc, p); }),
+      renaissance: winners(n, function (p) { return s.reps[p] > maxOthers(s.reps, p) && s.law[p] - maxOthers(s.law, p) >= 2; }),
+      holy: sup === null ? [] : winners(n, function (p) { return s.rel[sup][p] > maxOthers(s.rel[sup], p); }),
+      patron: (function () { var m = Math.max.apply(null, s.patron.slice(0, n)); return winners(n, function (p) { return s.patron[p] === m; }); })()
+    };
+  }
+  return { fair: fair, battle: battle, supreme: supreme, victory: victory };
+})();
+if (typeof module !== 'undefined') module.exports = Rules;
+
+/* ---------- page ---------- */
+if (typeof document !== 'undefined') (function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var PL = [
+    { n: 'Синий (Фуггер)', c: 'c-pb' }, { n: 'Жёлтый (Медичи)', c: 'c-py' },
+    { n: 'Фиолетовый (Кёр)', c: 'c-pv' }, { n: 'Зелёный (Маркьонни)', c: 'c-pg' }
+  ];
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem('pren.' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem('pren.' + k, JSON.stringify(v)); } catch (e) { } }
+  };
+  var state = { banks: store.get('banks', [true, true, true, true]) };
+  if (!Array.isArray(state.banks) || state.banks.length !== 4 || state.banks.filter(Boolean).length < 2) state.banks = [true, true, true, true];
+  function active() { var a = []; state.banks.forEach(function (on, i) { if (on) a.push(i); }); return a; }
+  Object.defineProperty(state, 'players', { get: function () { return active().length; } });
+  function fl(n) { return '<span class="fl">' + n + '</span>'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* navigation: one view at a time, routed on the hash */
+  var views = $$('.view'), links = $$('#nav a');
+  function show() {
+    var id = (location.hash || '').slice(1);
+    if (!document.getElementById(id) || !document.getElementById(id).classList.contains('view')) {
+      // allow links to tools inside a view
+      var el = id && document.getElementById(id), v = el && el.closest('.view');
+      id = v ? v.id : 'hod';
+    }
+    views.forEach(function (v) { v.classList.toggle('on', v.id === id); });
+    links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (!document.body.classList.contains('searching')) window.scrollTo(0, 0);
+    var cur = document.querySelector('#nav a[aria-current]'), nav = document.getElementById('nav');
+    if (cur && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = cur.offsetLeft - nav.offsetLeft - 12;
+  }
+  window.addEventListener('hashchange', function () { clearSearch(); show(); });
+  links.forEach(function (a) { a.addEventListener('click', function () { clearSearch(); if (location.hash === a.getAttribute('href')) show(); }); });
+
+  /* search: show every row that contains all typed words */
+  var q = $('#q');
+  function clearSearch() { if (q.value) { q.value = ''; search(); } }
+  function search() {
+    var words = q.value.toLowerCase().replace(/ё/g, 'е').split(/\s+/).filter(Boolean);
+    var on = words.length > 0, any = false;
+    document.body.classList.toggle('searching', on);
+    views.forEach(function (v) {
+      var hit = false;
+      $$('.row', v).forEach(function (r) {
+        var t = r.textContent.toLowerCase().replace(/ё/g, 'е');
+        var ok = on && words.every(function (w) { return t.indexOf(w) >= 0; });
+        r.classList.toggle('nohit', on && !ok);
+        if (ok) hit = true;
+      });
+      v.classList.toggle('nohit', on && !hit);
+      if (hit) any = true;
+    });
+    document.body.classList.toggle('none', on && !any);
+  }
+  q.addEventListener('input', search);
+
+  /* steppers */
+  var stepVals = {};
+  function bindSteppers(root, onChange) {
+    $$('.step', root).forEach(function (s) {
+      if (s.dataset.bound) return; s.dataset.bound = '1';
+      var out = $('output', s), min = +s.dataset.min || 0, max = s.dataset.max ? +s.dataset.max : 20, key = s.dataset.step;
+      if (stepVals[key] === undefined) stepVals[key] = +out.textContent || 0; else out.textContent = stepVals[key];
+      var btn = $$('button', s);
+      function set(v) { v = Math.max(min, Math.min(max, v)); stepVals[key] = v; out.textContent = v; onChange(); }
+      btn[0].addEventListener('click', function () { set(stepVals[key] - 1); });
+      btn[1].addEventListener('click', function () { set(stepVals[key] + 1); });
+    });
+  }
+  function stepHTML(key, val, max) {
+    if (stepVals[key] === undefined) stepVals[key] = val;
+    return '<span class="step" data-step="' + key + '" data-min="0" data-max="' + (max || 20) + '"><button type="button" aria-label="меньше">−</button><output>' + stepVals[key] + '</output><button type="button" aria-label="больше">+</button></span>';
+  }
+
+  /* player count */
+  function applyPlayers() {
+    var n = state.players;
+    $$('#pc button').forEach(function (b) { b.setAttribute('aria-pressed', String(!!state.banks[+b.dataset.b])); });
+    $('#pcn').textContent = n === 2 ? 'двое' : n === 3 ? 'трое' : 'четверо';
+    $$('[data-fair-add]').forEach(function (e) { e.textContent = n <= 2 ? 1 : 2; });
+    $$('[data-imp]').forEach(function (e) { e.textContent = n === 2 ? 3 : 2; });
+    $$('[data-deck-top]').forEach(function (e) { e.textContent = 4 * n; });
+    $$('[data-deck]').forEach(function (e) { e.textContent = 14 + 4 * n; });
+    var names = ['первый', 'второй', 'третий', 'четвёртый'], parts = [];
+    for (var i = 0; i < n; i++) parts.push(names[i] + ' ' + fl(3 + i));
+    $('#start-fl').innerHTML = parts.join(', ');
+    renderFair(); renderVictory(); renderBattle();
+  }
+  $$('#pc button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = +b.dataset.b;
+      if (state.banks[i] && state.players <= 2) return; // at least two banks stay at the table
+      state.banks[i] = !state.banks[i]; store.set('banks', state.banks); fairSel = {}; applyPlayers();
+    });
+  });
+
+  /* ---------- battle helper ---------- */
+  var BF = {
+    camp: { a: [['b-kn', 'Рыцари в империи вашего короля', 'любого цвета, идут все', 2]], d: [['b-def', 'Рыцари и башни в городах цели', '', 1]] },
+    consp: { a: [['b-ag', 'Агенты карты: рыцари, башни, пираты', 'без епископов и пешек', 1], ['b-pi', 'Пираты на границах империи', 'любого цвета', 0], ['b-rep', 'Репрессированные рыцари и башни на её тайле', 'любого цвета', 1]], d: [['b-def', 'Рыцари и башни в городах', '', 1]] },
+    peas: { a: [['b-ag', 'Агенты карты: пешки, рыцари, башни, пираты', 'без епископов', 1], ['b-my', 'Ваши торговцы на границах империи', 'идут все', 1], ['b-pi', 'Пираты на границах империи', 'любого цвета', 0], ['b-serf', 'Крепостные на её тайле', 'пешки любого цвета', 0]], d: [['b-def', 'Рыцари и башни в городах', '', 1]] },
+    rel: { a: [['b-ag', 'Агенты карты: рыцари, башни, пираты', 'без епископов и пешек', 1], ['b-bel', 'Верующие рыцари и башни в городах империи', 'цвет религии войны', 0], ['b-bpi', 'Верующие пираты на её границах', '', 0], ['b-adj', 'Верующие рыцари в соседних империях', 'включая диагональ', 0]], d: [['b-her', 'Еретики в городах империи', 'рыцари и башни двух других цветов', 1], ['b-hpi', 'Пираты-еретики на её границах', '', 0]] }
+  };
+  function renderBattleFields() {
+    var t = $('#b-type').value, f = BF[t], h = '<h4 style="font:600 15px var(--body);margin:6px 0 0">Атакуют</h4>';
+    f.a.forEach(function (x) { h += '<div class="f"><span>' + x[1] + (x[2] ? '<small>' + x[2] + '</small>' : '') + '</span>' + stepHTML(t + x[0], x[3]) + '</div>'; });
+    h += '<h4 style="font:600 15px var(--body);margin:6px 0 0">Защищают</h4>';
+    f.d.forEach(function (x) { h += '<div class="f"><span>' + x[1] + (x[2] ? '<small>' + x[2] + '</small>' : '') + '</span>' + stepHTML(t + x[0], x[3]) + '</div>'; });
+    $('#b-fields').innerHTML = h;
+    var own = $('#b-tile option[value="own"]');
+    own.disabled = t === 'camp';
+    if (t === 'camp' && $('#b-tile').value === 'own') $('#b-tile').value = 'throne';
+    bindSteppers($('#b-fields'), renderBattle);
+  }
+  function renderBattle() {
+    var t = $('#b-type').value, f = BF[t], tile = $('#b-tile').value;
+    var sum = function (list) { return list.reduce(function (s, x) { return s + (stepVals[t + x[0]] || 0); }, 0); };
+    var A = sum(f.a), D = sum(f.d), r = Rules.battle(A, D), h = '', li = [];
+    if (t === 'rel' && D === 0) {
+      $('#b-res').innerHTML = '<div class="verdict lose">Войну начать нельзя</div><p>В империи нет ни одного еретика: ни в городах, ни пирата на границах. Репрессированные не считаются.</p>';
+      return;
+    }
+    if (A === 0) {
+      $('#b-res').innerHTML = '<div class="verdict lose">Атаковать некем</div><p>Без атакующих победы не будет. ' + (t === 'camp' ? 'Кампании нужен хотя бы один рыцарь в империи короля.' : 'Разовое действие можно не объявлять и просто выставить агентов.') + '</p>';
+      return;
+    }
+    h += '<div class="verdict ' + (r.win ? 'win' : 'lose') + '">' + (r.win ? 'Победа атакующего' : 'Победы нет') + '</div>';
+    h += '<p>Атакующих <b>' + A + '</b>, защитников <b>' + D + '</b>. Размен: по ' + r.killed + ' с каждой стороны. ' +
+      (r.win ? 'Выживших атакующих: <b>' + r.survivors + '</b>. Кто выжил, решаете вы.' : 'Все атакующие погибают' + (r.defLeft ? ', в городах остаётся защитников: <b>' + r.defLeft + '</b>. Кого убить, выбираете вы.' : ', защитники тоже.')) + '</p>';
+    if (t === 'camp') li.push('Заплатите ' + fl(stepVals['campb-kn'] || 0) + ' в Китай: по 1 за каждого рыцаря.');
+    if (!r.win) {
+      li.push('Тайл империи остаётся на месте, смены режима нет.');
+      if (t !== 'camp') li.push('Карта остаётся в вашей игровой зоне. Погибшие агенты не выставляются. Епископа-агента поставьте по обычным правилам.');
+    } else {
+      if (t === 'camp') {
+        li.push('Выжившие рыцари остаются в своих городах, в завоёванную империю никто не переходит.');
+        li.push(tile === 'throne'
+          ? 'Положите тайл с престола под своего короля как вассала. Королева, епископы и репрессированные переезжают с ним.'
+          : 'Заберите тайл у соперника королём вверх и положите под своего короля как вассала. Королева и епископы сбрасываются, репрессированные остаются. Его вассалы возвращаются на свои престолы.');
+        li.push('Если кампанию вёл ваш вассал, новый вассал ложится под того же сюзерена.');
+      } else {
+        if (t === 'consp') li.push('Выживших агентов и репрессированных рыцарей и башен поставьте в пустые города империи. Не хватило городов: остальные бесплатно на тайл. Выживший пират-агент идёт на пустую морскую границу или сбрасывается.');
+        if (t === 'peas') li.push('Выживших пешек-агентов и крепостных поставьте на пустые границы империи, рыцарей и башни-агентов в пустые города. Не хватило места: бесплатно на тайл. Пират-агент без места сбрасывается.');
+        if (t === 'rel') {
+          li.push('Империя становится теократией религии войны: положите или переверните карту территории.');
+          li.push('Выжившие верующие остаются в своих городах, соседние рыцари дома. Выживших агентов поставьте в пустые города, лишних бесплатно на тайл.');
+        }
+        li.push(tile === 'throne'
+          ? 'Заберите короля с престола на край своей зоны. Королева, епископы и репрессированные переезжают с ним.'
+          : tile === 'opp'
+            ? 'Заберите тайл у соперника королём вверх на край своей зоны. Королева и епископы сбрасываются, репрессированные остаются. Его вассалы возвращаются на свои престолы.'
+            : 'Переверните свой тайл (король в республику или обратно) и переложите на край зоны. Королева и епископы сбрасываются, репрессированные остаются. Его вассалы возвращаются на свои престолы.');
+        li.push('Если у карты есть епископ-агент, поставьте его по обычным правилам.');
+      }
+      li.push('Смена режима: можете поставить одну свою пешку на границу этой империи (не к пирату; чужую пешку репрессируйте за ' + fl(1) + ').');
+      li.push('Можете освободить любых репрессированных с этого тайла: рыцарей и башни в пустые города, пешки на пустые границы.');
+    }
+    h += '<ul>' + li.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    $('#b-res').innerHTML = h;
+  }
+  $('#b-type').addEventListener('change', function () { renderBattleFields(); renderBattle(); });
+  $('#b-tile').addEventListener('change', renderBattle);
+
+  /* ---------- fair calculator ---------- */
+  var ROUTES = {
+    treb: { emp: ['Византия', 'Венгрия', 'Османская империя', 'Папская область', 'Арагон', 'Португалия', 'Англия', 'Франция', 'Священная Римская империя'], pre: { 3: 'p1', 5: 'p3', 7: 'p0' } },
+    tana: { emp: ['Византия', 'Венгрия', 'Османская империя', 'Мамлюкский султанат'], pre: { 2: 'p2' } }
+  };
+  var fairSel = {}; // route -> array of border values
+  function routeDef() {
+    var k = $('#f-route').value;
+    if (k !== 'custom') return ROUTES[k];
+    var n = stepVals['f-len'] || 4, emp = [];
+    for (var i = 0; i <= n; i++) emp.push(i === 0 ? 'Империя с торговым центром' : i === n ? 'Последняя империя (стрелка)' : 'Империя ' + (i + 1));
+    return { emp: emp, pre: {} };
+  }
+  function renderFair() {
+    var k = $('#f-route').value, rd = routeDef(), nb = rd.emp.length - 1;
+    $('#f-len-f').hidden = k !== 'custom';
+    var key = k === 'custom' ? 'custom' + nb : k;
+    if (!fairSel[key]) { fairSel[key] = []; for (var i = 0; i < nb; i++) { var pv = rd.pre[i] || ''; fairSel[key].push(pv && !state.banks[+pv[1]] ? '' : pv); } }
+    var sel = fairSel[key];
+    var act = active();
+    var init = $('#f-init') ? +$('#f-init').value : act[0]; if (!state.banks[init]) init = act[0];
+    var opts = function (v) {
+      var o = '<option value=""' + (v === '' ? ' selected' : '') + '>пусто</option>';
+      act.forEach(function (i) { o += '<option value="p' + i + '"' + (v === 'p' + i ? ' selected' : '') + '>торговец: ' + PL[i].n.split(' ')[0].toLowerCase() + '</option>'; });
+      o += '<option value="x"' + (v === 'x' ? ' selected' : '') + '>пират</option>';
+      return o;
+    };
+    var borders = sel.map(function (v) { return { pawn: /^p\d$/.test(v) ? +v[1] : null, pirate: v === 'x' }; });
+    var r = Rules.fair({ players: state.players, onCard: stepVals['f-card'] || 0, borders: borders, empires: rd.emp, initiator: init, bankruptcy: $('#f-bank').checked });
+    var h = '<label class="f"><span>Кто запускает ярмарку</span><select id="f-init">' + act.map(function (i) { return '<option value="' + i + '"' + (i === init ? ' selected' : '') + '>' + PL[i].n + '</option>'; }).join('') + '</select></label>';
+    rd.emp.forEach(function (e, i) {
+      h += '<div class="rt emp' + (r.levies.indexOf(i) >= 0 ? ' lev' : '') + '">' + esc(e) + '</div>';
+      if (i < nb) h += '<label class="rt bd' + (r.stop === i ? ' stop' : '') + '"><span>граница' + (r.stop === i ? ', здесь вояж обрывается' : '') + '</span><select data-b="' + i + '" id="f-b' + i + '">' + opts(sel[i]) + '</select></label>';
+    });
+    $('#f-routebox').innerHTML = h;
+    $('#f-init').addEventListener('change', renderFair);
+    $$('#f-routebox select[data-b]').forEach(function (s) { s.addEventListener('change', function () { sel[+s.dataset.b] = s.value; renderFair(); }); });
+
+    var o = '<div class="verdict">Прибыль ' + fl(r.total) + '</div>';
+    o += '<p>' + (stepVals['f-card'] || 0) + ' на карте и ' + r.add + ' из Китая (' + (state.players <= 2 ? 'игра вдвоём' : 'игроков трое или четверо') + ').</p><ul>';
+    var who = Object.keys(r.gains).map(Number).sort();
+    if (!who.length) o += '<li>Никто из игроков флоринов не получает.</li>';
+    who.forEach(function (p) {
+      var own = p === init && !$('#f-bank').checked, n = r.gains[p];
+      o += '<li><svg class="ic ' + PL[p].c + '"><use href="#i-pawn"/></svg> ' + PL[p].n + ': ' + fl('+' + n) + (own ? (n > 1 ? ' (1 как инициатор, ' + (n - 1) + ' за торговцев)' : ' как инициатор') : ' за торговцев') + '</li>';
+    });
+    if (r.china) o += '<li>Пираты уводят в Китай ' + fl(r.china) + '</li>';
+    if (!r.started) o += '<li><b>Вояж не начинается:</b> после доли инициатора прибыли не осталось. Выплат и сборов нет.</li>';
+    else if (r.stop !== null) o += '<li><b>Вояж обрывается</b> на границе после империи «' + esc(rd.emp[r.stop]) + '»: там забран последний флорин.</li>';
+    else o += '<li><b>Вояж дошёл до конца пути.</b>' + (r.left ? ' В ячейке остаётся ' + fl(r.left) + ': они лягут на новую карту ярмарки.' : '') + '</li>';
+    o += '</ul>';
+    if (r.levies.length) o += '<p><b>Сборы</b> (по одной фигуре в пустой город, если империя не заполнена): ' + r.levies.map(function (i) { return esc(rd.emp[i]); }).join(', ') + '.</p>';
+    $('#f-res').innerHTML = o;
+  }
+  $('#f-route').addEventListener('change', renderFair);
+  $('#f-bank').addEventListener('change', renderFair);
+
+  /* ---------- victory checker ---------- */
+  var VROWS = [['kings', 'Короли (сюзерены и вассалы)'], ['reps', 'Республики'], ['pawns', 'Торговцы на границах'], ['disc', 'Достижения: открытие'], ['law', 'Достижения: закон'], ['patron', 'Достижения: покровитель'],
+    ['rel0', 'Достижения: католицизм', 1], ['rel1', 'Достижения: ислам'], ['rel2', 'Достижения: реформация']];
+  var vals = store.get('victory', {});
+  var RELN = ['Католицизм', 'Ислам', 'Реформация'], RELC = ['c-gold', 'c-green', 'c-red'];
+  function v(k) { return Math.max(0, parseInt(vals[k], 10) || 0); }
+  function buildVictory() {
+    var act = active(), h = '<thead><tr><th></th>';
+    act.forEach(function (p) { h += '<th class="pl"><svg class="ic ' + PL[p].c + '"><use href="#i-pawn"/></svg><br>' + PL[p].n.split(' ')[0] + '</th>'; });
+    h += '</tr></thead><tbody>';
+    VROWS.forEach(function (r) {
+      h += '<tr' + (r[2] ? ' class="sep"' : '') + '><th>' + r[1] + '</th>';
+      act.forEach(function (p) { h += '<td><input type="number" min="0" max="99" inputmode="numeric" id="v-' + r[0] + '-' + p + '" aria-label="' + r[1] + ', ' + PL[p].n + '" value="' + v(r[0] + '-' + p) + '"></td>'; });
+      h += '</tr>';
+    });
+    $('#v-table').innerHTML = h + '</tbody>';
+    var s = '<thead><tr><th></th>' + RELN.map(function (x, i) { return '<th class="pl ' + RELC[i] + '">' + x + '</th>'; }).join('') + '</tr></thead><tbody>';
+    [['bis', 'Епископы на картах и тайлах'], ['bel', 'Верующие в своих теократиях']].forEach(function (r) {
+      s += '<tr><th>' + r[1] + '</th>';
+      for (var i = 0; i < 3; i++) s += '<td><input type="number" min="0" max="99" inputmode="numeric" id="v-' + r[0] + '-' + i + '" aria-label="' + r[1] + ', ' + RELN[i] + '" value="' + v(r[0] + '-' + i) + '"></td>';
+      s += '</tr>';
+    });
+    $('#v-sup').innerHTML = s + '</tbody>';
+    $$('#victory input').forEach(function (inp) { inp.addEventListener('input', function () { vals[inp.id.slice(2)] = inp.value; store.set('victory', vals); calcVictory(); }); });
+  }
+  function calcVictory() {
+    var act = active(), n = act.length, col = function (k) { return act.map(function (p) { return v(k + '-' + p); }); };
+    var bis = [v('bis-0'), v('bis-1'), v('bis-2')], bel = [v('bel-0'), v('bel-1'), v('bel-2')];
+    var sup = Rules.supreme(bis, bel);
+    var why = RELN.map(function (x, i) {
+      var ob = bis[0] + bis[1] + bis[2] - bis[i], ov = bel[0] + bel[1] + bel[2] - bel[i];
+      return '<li><b class="' + RELC[i] + '">' + x + ':</b> епископы ' + bis[i] + ' против ' + ob + (bis[i] > ob ? ' <span class="yes">да</span>' : ' <span class="no">нет</span>') + ', верующие ' + bel[i] + ' против ' + ov + (bel[i] > ov ? ' <span class="yes">да</span>' : ' <span class="no">нет</span>') + '</li>';
+    }).join('');
+    $('#v-sup-res').innerHTML = '<div class="verdict ' + (sup === null ? 'lose' : 'win') + '">' + (sup === null ? 'Верховной религии нет' : 'Верховная религия: ' + RELN[sup].toLowerCase()) + '</div><ul>' + why + '</ul>';
+    var r = Rules.victory(n, { kings: col('kings'), reps: col('reps'), pawns: col('pawns'), disc: col('disc'), law: col('law'), patron: col('patron'), rel: [col('rel0'), col('rel1'), col('rel2')] }, sup);
+    var name = function (a) { return a.map(function (p) { return PL[act[p]].n.split(' ')[0]; }).join(', '); };
+    var box = function (t, a, note) { return '<div><b>' + t + '</b>' + (a.length ? '<span class="yes">Может объявить: ' + name(a) + '</span>' : '<span class="c-mut">Условия не выполнены ни у кого</span>') + (note ? '<br><small class="c-mut">' + note + '</small>' : '') + '</div>'; };
+    $('#v-res').innerHTML =
+      box('Империализм', r.imperial, 'перевес королей ' + (n === 2 ? 3 : 2) + ' и больше') +
+      box('Глобализация', r.global, 'на 2 торговца больше и больше открытий') +
+      box('Ренессанс', r.renaissance, 'больше республик и на 2 закона больше') +
+      box('Священная', r.holy, sup === null ? 'нет верховной религии' : 'больше достижений религии: ' + RELN[sup].toLowerCase()) +
+      '<div><b>Покровитель</b>' + (r.patron.length === 1 ? 'Если рынок опустеет, победит: ' + name(r.patron) : 'Равенство: ' + name(r.patron) + '. Решит число флоринов') + '<br><small class="c-mut">только когда обе колоды закончились</small></div>';
+  }
+  function renderVictory() { buildVictory(); calcVictory(); }
+
+  /* ---------- start ---------- */
+  bindSteppers(document, function () { renderFair(); });
+  renderBattleFields();
+  applyPlayers();
+  show();
+})();
+</script>
+</body>
+</html>
