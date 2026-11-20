@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* pick the view mode before first paint: saved choice, otherwise by width */
+(function(){var m=null;try{m=JSON.parse(localStorage.getItem('pren.mode'))}catch(e){}
+if(m!=='phone'&&m!=='wide')m=window.innerWidth<700?'phone':'wide';
+document.documentElement.setAttribute('data-mode',m);
+if(m==='wide'&&Math.min(screen.width,screen.height)<700)document.querySelector('meta[name="viewport"]').setAttribute('content','width=980');})();
+</script>
 <title>Памятка Pax Renaissance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -236,21 +243,8 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 .mapk span{display:inline-flex;align-items:center;gap:6px}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block;border:1.5px solid var(--ink)}
 
-@media (max-width:860px){
-  .app{grid-template-columns:minmax(0,1fr)}
-  .rail{position:sticky;top:0;z-index:5;height:auto;background:var(--paper);border-right:0;border-bottom:1px solid var(--rule);padding:10px 16px;gap:8px}
-  .brand{font-size:20px}.brand small{display:none}
-  .nav{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:2px}
-  .nav a{white-space:nowrap;padding:7px 10px;font-size:15px}
-  .nav a .k{display:none}
-  .ctl{flex-direction:row;align-items:center;flex-wrap:wrap}
-  .ctlrow{display:flex;gap:10px;flex-wrap:wrap}
-  .row{grid-template-columns:minmax(0,1fr)}
-  .tg>.res{position:static}
-  .card-an{grid-template-columns:minmax(0,1fr)}
-}
 @media print{
-  .rail,.tool{display:none}
+  .rail,.tool,.dock,.top,.sbar{display:none!important}
   .app{display:block}
   .view{display:block;break-before:page}
   .view:first-of-type{break-before:auto}
@@ -264,6 +258,94 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 .banks button{width:44px;height:44px;border-radius:8px;border:1.5px solid var(--rule);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.45}
 .banks button svg{width:24px;height:24px}
 .banks button[aria-pressed="true"]{opacity:1;border-color:currentColor;background:color-mix(in srgb,currentColor 14%,var(--surface))}
+
+/* ---------- shared chrome for both modes ---------- */
+.top{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-bottom:6px}
+.top .brand{display:none}
+.top .seg button{font-size:14px;padding:6px 12px}
+.sbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;margin-bottom:14px;border-radius:8px;background:var(--lapis-soft);font-size:15px}
+.sbar button,.sheet-x,.qgo{border:1px solid var(--rule);background:var(--surface);border-radius:7px;padding:7px 12px;cursor:pointer}
+.dock,.sheet-x,.qgo,.map-p,.ph,.ls{display:none}
+.qrow{display:flex;gap:6px}
+.tool{scroll-margin-top:70px}
+
+/* ---------- phone mode: one column, bottom dock, sections in a sheet ---------- */
+:root[data-mode="phone"] body{font-size:16px}
+:root[data-mode="phone"] .app{display:block}
+:root[data-mode="phone"] main{padding:0 16px 96px;max-width:620px;margin:0 auto}
+:root[data-mode="phone"] .top{position:sticky;top:0;z-index:6;justify-content:space-between;margin:0 -16px 14px;padding:8px 16px;background:var(--paper);border-bottom:1px solid var(--rule)}
+:root[data-mode="phone"] .top .brand{display:block;font-size:21px}
+:root[data-mode="phone"] .top .seg button{padding:8px 11px;min-height:38px}
+:root[data-mode="phone"] .rail{display:none;position:fixed;inset:0;z-index:20;height:auto;background:var(--paper);border:0;padding:16px 16px 92px;overflow-y:auto;gap:16px}
+:root[data-mode="phone"] body.sheet{overflow:hidden}
+:root[data-mode="phone"] body.sheet .rail{display:flex}
+:root[data-mode="phone"] .rail .brand{font-size:24px;padding-right:96px}
+:root[data-mode="phone"] .sheet-x{display:block;position:absolute;top:14px;right:16px;min-height:40px}
+:root[data-mode="phone"] .nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+:root[data-mode="phone"] .nav a{border:1px solid var(--rule);background:var(--surface);min-height:52px;padding:10px 12px;font-size:16px}
+:root[data-mode="phone"] .nav a[aria-current="page"]{background:var(--ink);border-color:var(--ink)}
+:root[data-mode="phone"] .search{min-height:46px;font-size:16px}
+:root[data-mode="phone"] .qgo{display:block;min-height:46px}
+:root[data-mode="phone"] .banks button{width:52px;height:52px}
+:root[data-mode="phone"] .dock{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--rule)}
+.dock a,.dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;border:0;background:none;color:var(--muted);font-size:11.5px;line-height:1.1;text-decoration:none;cursor:pointer;padding:6px 2px}
+.dock svg{width:23px;height:23px;fill:currentColor}
+.dock [aria-current="page"],.dock [aria-expanded="true"]{color:var(--lapis);font-weight:600}
+:root[data-mode="phone"] .vh{padding-bottom:12px}
+:root[data-mode="phone"] .vh h2{font-size:33px}
+:root[data-mode="phone"] .lead{font-size:16.5px}
+:root[data-mode="phone"] .row{grid-template-columns:minmax(0,1fr);gap:8px;padding:16px 0}
+:root[data-mode="phone"] .row>h3{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:22px}
+:root[data-mode="phone"] .fig.wide{padding:8px 0 16px}
+:root[data-mode="phone"] .plate{padding:10px}
+:root[data-mode="phone"] .card-an{grid-template-columns:minmax(0,1fr);justify-items:start}
+:root[data-mode="phone"] .gcard{justify-self:center}
+:root[data-mode="phone"] .market{grid-template-columns:repeat(4,minmax(0,1fr));min-width:0;gap:6px}
+:root[data-mode="phone"] .slot{font-size:11.5px}
+:root[data-mode="phone"] .plate:has(.tableau){padding:8px 6px}
+:root[data-mode="phone"] .tableau{min-width:0;grid-template-columns:auto auto auto;justify-content:center;gap:5px}
+:root[data-mode="phone"] .tableau .hd{display:none}
+:root[data-mode="phone"] .tableau .side{gap:5px;flex:none}
+:root[data-mode="phone"] .lw{display:none}
+:root[data-mode="phone"] .ls{display:inline}
+:root[data-mode="phone"] .tc{width:44px;font-size:9px;padding:1px;border-radius:5px;hyphens:auto;overflow-wrap:anywhere}
+:root[data-mode="phone"] .tc.tile{border-width:2px}
+:root[data-mode="phone"] .tc.rep{border-width:4px}
+:root[data-mode="phone"] .tc.wb,:root[data-mode="phone"] .tc.eb{border-top-width:6px}
+:root[data-mode="phone"] .tc.board,:root[data-mode="phone"] .tableau .stack>.tc[style*="118px"]{width:54px!important;min-height:72px}
+:root[data-mode="phone"] .tableau .stack>.tc[style*="dashed"]{min-height:0;padding:5px 1px!important}
+:root[data-mode="phone"] .tableau .stack>.tc[style*="margin-left"]{margin-left:0!important}
+:root[data-mode="phone"] .stack .sub{font-size:9px;max-width:54px!important}
+:root[data-mode="phone"] .stack:has(.tc.rep) .sub,:root[data-mode="phone"] .stack:has(.tc.wb) .sub,:root[data-mode="phone"] .stack:has(.tc.eb) .sub{max-width:44px!important}
+:root[data-mode="phone"] .couple{width:56px;height:80px}
+:root[data-mode="phone"] .couple .q{left:12px;top:14px}
+:root[data-mode="phone"] .map-w{display:none}
+:root[data-mode="phone"] .map-p{display:block}
+:root[data-mode="phone"] .ph{display:block}
+:root[data-mode="phone"] .tool{padding:14px;margin:4px 0 18px;border-radius:10px}
+:root[data-mode="phone"] .tg{grid-template-columns:minmax(0,1fr)}
+:root[data-mode="phone"] .tg>.res{position:static}
+:root[data-mode="phone"] .f.fs{grid-template-columns:minmax(0,1fr);gap:4px}
+:root[data-mode="phone"] select{min-height:44px;width:100%;font-size:16px}
+:root[data-mode="phone"] .step button{width:46px;height:46px}
+:root[data-mode="phone"] .rt{grid-template-columns:minmax(0,1fr) minmax(138px,168px)}
+:root[data-mode="phone"] .vt th,:root[data-mode="phone"] .vt td{padding:4px 3px}
+:root[data-mode="phone"] .vt tbody th{min-width:0;font-size:13.5px}
+:root[data-mode="phone"] .vt th.pl{min-width:44px;font-size:11.5px;padding:4px 1px;font-weight:600}
+:root[data-mode="phone"] .vt input{width:42px;min-height:40px;font-size:16px;padding:4px 0}
+:root[data-mode="phone"] .vt tbody th{font-size:13px;overflow-wrap:anywhere}
+/* wide tables become stacked records */
+:root[data-mode="phone"] table.st,:root[data-mode="phone"] table.st tbody,:root[data-mode="phone"] table.st tr,:root[data-mode="phone"] table.st th,:root[data-mode="phone"] table.st td{display:block}
+:root[data-mode="phone"] table.st thead{display:none}
+:root[data-mode="phone"] table.st tr{padding:10px 0;border-bottom:1px solid var(--rule)}
+:root[data-mode="phone"] table.st th,:root[data-mode="phone"] table.st td{border:0;padding:2px 0;min-width:0;width:auto}
+:root[data-mode="phone"] table.st tbody th{font-weight:600;font-size:16px}
+:root[data-mode="phone"] table.st td[data-label]::before{content:attr(data-label) ": ";color:var(--muted);font-weight:600;font-size:13.5px}
+:root[data-mode="phone"] table.st.mx td.x{display:none}
+:root[data-mode="phone"] table.st tr.allx::after{content:"не участвуют ни в одной битве";color:var(--muted);font-size:14.5px}
+:root[data-mode="phone"] .goals,:root[data-mode="phone"] .goals tbody,:root[data-mode="phone"] .goals tr,:root[data-mode="phone"] .goals td{display:block;width:auto}
+:root[data-mode="phone"] .goals tr{padding:10px 0;border-bottom:1px solid var(--rule)}
+:root[data-mode="phone"] .goals td{border:0;padding:2px 0}
 </style>
 </head>
 <body>
@@ -276,12 +358,15 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     <symbol id="i-ship" viewBox="0 0 24 24"><path d="M11.400 2.600h1.200v10.200h-1.200zM10.600 5v7.400H5.400zM13.400 4c2.700 1.700 4.500 4.700 4.900 8.400h-4.900zM3.400 14h17.200l-2.200 4.400c-.3.600-.9 1-1.600 1H7.200c-.7 0-1.300-.4-1.600-1z"/></symbol>
     <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.600 8l4.400 4 4-7 4 7 4.400-4-1.800 10H5.400zM5.400 19.400h13.200V21H5.400z"/></symbol>
     <symbol id="i-cols" viewBox="0 0 24 24"><path d="M3 8.200l9-5 9 5v1.400H3zM5 10.800h2.400v6.800H5zM10.800 10.800h2.400v6.800h-2.400zM16.600 10.800H19v6.800h-2.400zM3 18.800h18V21H3z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16v2.200H4zM4 10.900h16v2.200H4zM4 15.800h16V18H4z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path d="M10.500 3.500a7 7 0 0 1 5.600 11.200l4.400 4.400-1.500 1.500-4.400-4.400A7 7 0 1 1 10.500 3.500zm0 2.100a4.900 4.900 0 1 0 0 9.800 4.900 4.900 0 0 0 0-9.800z"/></symbol>
     <symbol id="i-bomb" viewBox="0 0 24 24"><path d="M10.600 8.200a6.400 6.400 0 1 0 3.500 1l1.300-1.500-1.500-1.300-1.200 1.400a6.400 6.400 0 0 0-2.100-.4zM16.200 5.600l1.600-1.800 1 .9-1.600 1.800zM18.600 7.200l2.200-.6.3 1.200-2.200.6zM15.200 3.400l.4-2.200 1.200.2-.4 2.200z"/></symbol>
   </defs>
 </svg>
 
 <div class="app">
-<aside class="rail">
+<aside class="rail" id="rail">
+  <button type="button" class="sheet-x" id="sheet-x">Закрыть</button>
   <div class="brand">Pax Renaissance<small>Памятка игрока по правилам v1.3 и своду сообщества v1.7</small></div>
   <nav class="nav" id="nav" aria-label="Разделы">
     <a href="#hod"><span class="k"></span>Ход и действия</a>
@@ -298,7 +383,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
   </nav>
   <div class="ctlrow" style="display:grid;gap:14px">
     <div class="ctl"><label for="q">Поиск по памятке</label>
-      <input class="search" id="q" type="search" placeholder="епископ, вассал, сбор…" autocomplete="off"></div>
+      <div class="qrow"><input class="search" id="q" type="search" placeholder="епископ, вассал, сбор…" autocomplete="off" enterkeyhint="search"><button type="button" class="qgo" id="qgo">Найти</button></div></div>
     <div class="ctl"><span id="pcl">Банки в игре: <b id="pcn">четверо</b></span>
       <div class="banks" id="pc" role="group" aria-labelledby="pcl">
         <button type="button" data-b="0" class="c-pb" title="Фуггер, синий" aria-label="Фуггер, синий"><svg class="ic"><use href="#i-pawn"/></svg></button>
@@ -310,6 +395,9 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 </aside>
 
 <main id="main">
+<header class="top"><span class="brand">Pax Renaissance</span>
+  <div class="seg" id="mode" role="group" aria-label="Вид страницы"><button type="button" data-m="phone">Телефон</button><button type="button" data-m="wide">Планшет</button></div></header>
+<div class="sbar" id="sbar" hidden><span id="sbar-t"></span><button type="button" id="sbar-x">Сбросить поиск</button></div>
 <p class="empty" id="empty">Ничего не найдено. Попробуйте другое слово, например «репрессии» или «королева».</p>
 
 <!-- ============ ХОД ============ -->
@@ -319,7 +407,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 
   <article class="row"><h3>Восемь действий <span class="ref">D1, с. 7</span></h3>
     <div class="rb w">
-      <div class="tw"><table>
+      <div class="tw"><table class="st">
         <thead><tr><th>Действие</th><th>Сколько раз за ход</th><th>Суть</th></tr></thead>
         <tbody>
           <tr><th>Купить карту</th><td>до 2</td><td>Открытая карта рынка идёт в руку. Комета разыгрывается сразу.</td></tr>
@@ -418,7 +506,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     <figcaption>Схема восточной карты. У западных карт знамя белое, локация в правом углу.</figcaption></figure>
 
   <article class="row"><h3>Куда ставить агентов <span class="ref">E2.2, с. 10–11</span></h3>
-    <div class="rb w"><div class="tw"><table>
+    <div class="rb w"><div class="tw"><table class="st">
       <thead><tr><th>Агент</th><th>Куда</th><th>Если место занято</th></tr></thead>
       <tbody>
         <tr><th><svg class="ic"><use href="#i-bishop"/></svg> Епископ</th><td>На любую карту любой игровой зоны (в том числе на саму разыгранную) или на любой тайл империи, где бы он ни лежал. Локация цели должна совпадать с локацией разыгранной карты.</td><td>Епископ и уже стоящий там епископ убивают друг друга. Если епископа нет, а на тайле есть репрессированные, можно бесплатно убить одну такую фигуру.</td></tr>
@@ -440,15 +528,15 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     </div></article>
 
   <figure class="fig wide"><div class="plate"><div class="tableau">
-      <div class="hd">← новые западные карты и тайлы на левый край</div><div></div><div class="hd r">новые восточные на правый край →</div>
+      <div class="hd">← новые западные карты и тайлы на левый край</div><div class="hd"></div><div class="hd r">новые восточные на правый край →</div>
       <div class="side west">
-        <div class="stack"><div class="tc rep">Респуб­лика</div><div class="sub">рамка из колонн</div></div>
-        <div class="stack"><div class="tc wb">Западная карта</div><div class="sub">белое знамя</div></div>
-        <div class="stack"><div class="tc tile">Король-сюзерен</div><div class="tc tile" style="margin-left:14px">Вассал</div><div class="sub">вассал под сюзереном</div></div>
+        <div class="stack"><div class="tc rep"><span class="lw">Респуб­лика</span><span class="ls">Респ.</span></div><div class="sub"><span class="ls">республика: </span>рамка из колонн</div></div>
+        <div class="stack"><div class="tc wb"><span class="lw">Западная карта</span><span class="ls">Запад</span></div><div class="sub">белое знамя</div></div>
+        <div class="stack"><div class="tc tile"><span class="lw">Король-сюзерен</span><span class="ls">Король</span></div><div class="tc tile" style="margin-left:14px">Вассал</div><div class="sub">вассал под сюзереном</div></div>
       </div>
-      <div class="stack"><div class="tc board">Планшет банкира</div><div class="tc" style="width:118px;aspect-ratio:auto;padding:8px 5px;border-style:dashed">Старая дева</div><div class="sub" style="max-width:118px">под планшетом, вне игровой зоны</div></div>
+      <div class="stack"><div class="tc board"><span class="lw">Планшет банкира</span><span class="ls">Планшет</span></div><div class="tc" style="width:118px;aspect-ratio:auto;padding:8px 5px;border-style:dashed">Старая дева</div><div class="sub" style="max-width:118px">под планшетом, вне игровой зоны</div></div>
       <div class="side">
-        <div class="stack"><div class="tc eb">Восточная карта</div><div class="sub">чёрное знамя</div></div>
+        <div class="stack"><div class="tc eb"><span class="lw">Восточная карта</span><span class="ls">Восток</span></div><div class="sub">чёрное знамя</div></div>
         <div class="stack"><div class="couple"><div class="tc tile k">Король</div><div class="tc eb q">Королева</div></div><div class="sub" style="max-width:104px">королевская пара</div></div>
       </div>
     </div></div>
@@ -565,14 +653,14 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     <p>Посчитайте фигуры на поле и введите числа. Помощник скажет исход и перечислит, что сделать после битвы.</p>
     <div class="tg">
       <div class="fields">
-        <label class="f"><span>Вид битвы</span>
+        <label class="f fs"><span>Вид битвы</span>
           <select id="b-type">
             <option value="camp">Кампания короля</option>
             <option value="consp">Заговор</option>
             <option value="peas">Крестьянское восстание</option>
             <option value="rel">Религиозная война</option>
           </select></label>
-        <label class="f" id="b-tile-f"><span>Где лежит тайл атакуемой империи</span>
+        <label class="f fs" id="b-tile-f"><span>Где лежит тайл атакуемой империи</span>
           <select id="b-tile">
             <option value="throne">На престоле</option>
             <option value="opp">У соперника</option>
@@ -599,7 +687,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     </div></article>
 
   <article class="row"><h3>Кто сражается</h3>
-    <div class="rb w"><div class="tw"><table class="mx">
+    <div class="rb w"><div class="tw"><table class="mx st">
       <thead><tr><th>Фигуры</th><th>Кампания</th><th>Заговор</th><th>Крестьянское восстание</th><th>Религиозная война</th></tr></thead>
       <tbody>
         <tr><th><svg class="ic"><use href="#i-knight"/></svg> <svg class="ic"><use href="#i-rook"/></svg> в городах атакуемой империи</th><td class="d">защищают</td><td class="d">защищают</td><td class="d">защищают</td><td><span class="a">верующие атакуют</span>, <span class="d">еретики защищают</span></td></tr>
@@ -740,7 +828,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     <p class="lead">Свиток со значком бомбы внизу карты. Срабатывает только при розыгрыше карты из руки и только по вашему желанию. Заговор, восстание и религиозные войны описаны в разделе «Битвы».</p></header>
 
   <article class="row"><h3><svg class="ic big"><use href="#i-bomb"/></svg>Шесть видов</h3>
-    <div class="rb w"><div class="tw"><table>
+    <div class="rb w"><div class="tw"><table class="st">
       <thead><tr><th>Разовое действие</th><th>Битва</th><th>Смена режима</th><th>Агенты</th></tr></thead>
       <tbody>
         <tr><th>Смена торгового центра</th><td>нет</td><td>нет</td><td>ставятся, если есть место</td></tr>
@@ -808,7 +896,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
     <p>Расставьте пешки и пиратов на границах так, как они стоят на поле. Готовые пути соответствуют началу партии: белый из Трапезунда и чёрный из Таны, со стартовыми пешками банков. После смены торгового центра сверьтесь с линией на поле и выберите «свой путь».</p>
     <div class="tg">
       <div class="fields">
-        <label class="f"><span>Путь</span>
+        <label class="f fs"><span>Путь</span>
           <select id="f-route">
             <option value="treb">Белый из Трапезунда (запад)</option>
             <option value="tana">Чёрный из Таны (восток)</option>
@@ -934,7 +1022,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
   <header class="vh"><h2>Поле и фигуры</h2>
     <p class="lead">Десять империй в два ряда, тринадцать границ между ними и два торговых пути. Рыцари, башни, епископы и пираты общие, своими у игрока бывают только пешки.</p></header>
 
-  <figure class="fig wide"><div class="plate"><svg viewBox="0 0 1024 402" width="1024" role="img" aria-label="Схема поля: десять империй, границы и два стартовых торговых пути" style="min-width:700px;font-family:var(--body)">
+  <figure class="fig wide"><div class="plate"><div class="map-w"><svg viewBox="0 0 1024 402" width="1024" role="img" aria-label="Схема поля: десять империй, границы и два стартовых торговых пути" style="min-width:700px;font-family:var(--body)">
 <defs><marker id="ah-w" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff" stroke="#161a21" stroke-width="1.4"/></marker><marker id="ah-b" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#161a21" stroke="#f2f3f1" stroke-width="1.4"/></marker></defs>
 <rect x="12" y="12" width="168" height="164" rx="10" fill="#ffffff" stroke="#8a9099" stroke-width="1.5"/>
 <text x="24" y="40" fill="#161a21" font-family="Forum, Georgia, serif" font-size="20">Англия</text>
@@ -1005,7 +1093,70 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 <circle cx="152" cy="201.0" r="17" fill="var(--surface)" stroke="var(--p-green)" stroke-width="2.4"/>
 <use href="#i-pawn" x="138.0" y="187.0" width="28" height="28" fill="var(--p-green)"/>
 <text x="176" y="206.0" text-anchor="start" font-size="14" font-weight="600" fill="var(--ink)" paint-order="stroke" stroke="var(--surface)" stroke-width="5" stroke-linejoin="round">Лиссабон</text>
-</svg></div>
+</svg></div><div class="map-p"><svg viewBox="0 0 364 230" width="364" role="img" aria-label="Схема поля: десять империй, границы и два стартовых торговых пути" style="font-family:var(--body);margin:0 auto">
+<defs><marker id="ac-w" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff" stroke="#161a21" stroke-width="1.6"/></marker><marker id="ac-b" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#161a21" stroke="#f2f3f1" stroke-width="1.6"/></marker></defs>
+<rect x="4" y="4" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="9" y="19" fill="#161a21" font-size="11.5" font-weight="600">Англия</text>
+<rect x="77" y="4" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="82" y="19" fill="#161a21" font-size="11.5" font-weight="600">Франция</text>
+<rect x="150" y="4" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="155" y="19" fill="#161a21" font-size="11.5" font-weight="600">СРИ</text>
+<circle cx="159" cy="91" r="3.6" fill="#161a21" stroke="#161a21" stroke-width="1"/>
+<text x="164" y="95.5" fill="#161a21" font-size="12.5">☆</text>
+<rect x="223" y="4" width="64" height="98" rx="6" fill="#161a21" stroke="#8a9099" stroke-width="1.2"/>
+<text x="228" y="19" fill="#f2f3f1" font-size="11.5" font-weight="600">Венгрия</text>
+<rect x="296" y="4" width="64" height="98" rx="6" fill="#161a21" stroke="#8a9099" stroke-width="1.2"/>
+<text x="301" y="19" fill="#f2f3f1" font-size="11.5" font-weight="600">Визант.</text>
+<circle cx="305" cy="91" r="3.6" fill="#161a21" stroke="#f2f3f1" stroke-width="1"/>
+<text x="310" y="95.5" fill="#f2f3f1" font-size="12.5">★</text>
+<circle cx="331" cy="91" r="3.6" fill="#ffffff" stroke="#f2f3f1" stroke-width="1"/>
+<text x="336" y="95.5" fill="#f2f3f1" font-size="12.5">★</text>
+<rect x="4" y="128" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="9" y="219" fill="#161a21" font-size="11.5" font-weight="600">Португ.</text>
+<circle cx="13" cy="140" r="3.6" fill="#ffffff" stroke="#161a21" stroke-width="1"/>
+<text x="18" y="144.5" fill="#161a21" font-size="12.5">☆</text>
+<rect x="77" y="128" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="82" y="219" fill="#161a21" font-size="11.5" font-weight="600">Арагон</text>
+<circle cx="86" cy="140" r="3.6" fill="#161a21" stroke="#161a21" stroke-width="1"/>
+<text x="91" y="144.5" fill="#161a21" font-size="12.5">☆</text>
+<rect x="150" y="128" width="64" height="98" rx="6" fill="#ffffff" stroke="#8a9099" stroke-width="1.2"/>
+<text x="155" y="219" fill="#161a21" font-size="11.5" font-weight="600">Папская</text>
+<text x="208" y="146" text-anchor="end" fill="#161a21" font-size="15">✝</text>
+<rect x="223" y="128" width="64" height="98" rx="6" fill="#161a21" stroke="#8a9099" stroke-width="1.2"/>
+<text x="228" y="219" fill="#f2f3f1" font-size="11.5" font-weight="600">Османы</text>
+<rect x="296" y="128" width="64" height="98" rx="6" fill="#161a21" stroke="#8a9099" stroke-width="1.2"/>
+<text x="301" y="219" fill="#f2f3f1" font-size="11.5" font-weight="600">Мамлюки</text>
+<text x="354" y="146" text-anchor="end" fill="#f2f3f1" font-size="15">☾</text>
+<circle cx="305" cy="140" r="3.6" fill="#ffffff" stroke="#f2f3f1" stroke-width="1"/>
+<text x="310" y="144.5" fill="#f2f3f1" font-size="12.5">☆</text>
+<line x1="72.5" y1="12" x2="72.5" y2="94" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="145.5" y1="12" x2="145.5" y2="94" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="218.5" y1="12" x2="218.5" y2="94" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="291.5" y1="12" x2="291.5" y2="94" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="72.5" y1="136" x2="72.5" y2="218" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="145.5" y1="136" x2="145.5" y2="218" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="218.5" y1="136" x2="218.5" y2="218" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="291.5" y1="136" x2="291.5" y2="218" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="12" y1="115.0" x2="60" y2="115.0" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="85" y1="115.0" x2="133" y2="115.0" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="158" y1="115.0" x2="206" y2="115.0" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="231" y1="115.0" x2="279" y2="115.0" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<line x1="304" y1="115.0" x2="352" y2="115.0" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 4"/>
+<polyline points="322,51 261,51 261,175 50,175 50,51 174,51" fill="none" stroke="#161a21" stroke-width="5.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="322,51 261,51 261,175 50,175 50,51 174,51" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ac-w)"/>
+<polyline points="322,65 275,65 275,189 324,189" fill="none" stroke="#f2f3f1" stroke-width="5.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="322,65 275,65 275,189 324,189" fill="none" stroke="#161a21" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ac-b)"/>
+<circle cx="322" cy="51" r="4.2" fill="#ffffff" stroke="#161a21" stroke-width="1.5"/>
+<circle cx="322" cy="65" r="4.2" fill="#161a21" stroke="#f2f3f1" stroke-width="1.5"/>
+<circle cx="145.5" cy="51" r="8.5" fill="var(--p-blue)" stroke="var(--surface)" stroke-width="2"/>
+<use href="#i-pawn" x="139.0" y="44.5" width="13" height="13" fill="#fff"/>
+<circle cx="145.5" cy="175" r="8.5" fill="var(--p-yellow)" stroke="var(--surface)" stroke-width="2"/>
+<use href="#i-pawn" x="139.0" y="168.5" width="13" height="13" fill="#fff"/>
+<circle cx="291.5" cy="189" r="8.5" fill="var(--p-violet)" stroke="var(--surface)" stroke-width="2"/>
+<use href="#i-pawn" x="285.0" y="182.5" width="13" height="13" fill="#fff"/>
+<circle cx="50" cy="115.0" r="8.5" fill="var(--p-green)" stroke="var(--surface)" stroke-width="2"/>
+<use href="#i-pawn" x="43.5" y="108.5" width="13" height="13" fill="#fff"/>
+</svg></div></div>
     <div class="mapk">
       <span><span class="tag w">запад</span> шесть империй</span>
       <span><span class="tag e">восток</span> четыре империи</span>
@@ -1014,6 +1165,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
       <span>☆ центр под жетоном разорения</span>
       <span>✝ ☾ теократии в начале игры</span>
     </div>
+    <p class="ph" style="font-size:14.5px"><b>Стартовые пешки:</b> синяя в Аугсбурге (Франция и СРИ), жёлтая во Флоренции (Арагон и Папская область), фиолетовая в Александрии (Османы и Мамлюки), зелёная в Лиссабоне (Англия и Португалия). <b>Торговые центры:</b> активны Тана и Трапезунд в Византии; под жетонами Новгород (СРИ), Тимбукту (Арагон), Острова пряностей (Португалия), Красное море (Мамлюки).</p>
     <figcaption>Схема поля в начале партии. Линии показывают, какие границы пересекают два стартовых пути: белый из Трапезунда и чёрный из Таны. Точный ход остальных путей смотрите на самом поле. Города на схеме не показаны.</figcaption></figure>
 
   <article class="row"><h3>Империи и соседство</h3>
@@ -1103,7 +1255,7 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
   <article class="row"><h3>Игроки <span class="ref">C2, C7, с. 7</span></h3>
     <div class="rb w">
       <p style="max-width:74ch">Каждый получает случайный планшет банкира, 10 пешек и 6 гербов своего цвета. Одну пешку поставьте на границу со своим гербом:</p>
-      <div class="tw"><table>
+      <div class="tw"><table class="st">
         <thead><tr><th>Банк</th><th>Стартовая пешка</th><th>Граница</th></tr></thead>
         <tbody>
           <tr><th><svg class="ic c-pb"><use href="#i-pawn"/></svg> Фуггер, синий</th><td>Аугсбург</td><td>Франция и Священная Римская империя</td></tr>
@@ -1209,6 +1361,13 @@ select{padding:8px 10px;border:1px solid var(--rule);border-radius:7px;backgroun
 </section>
 
 </main>
+<nav class="dock" id="dock" aria-label="Быстрый переход">
+  <button type="button" id="d-menu" aria-expanded="false" aria-controls="rail"><svg><use href="#i-menu"/></svg>Разделы</button>
+  <a href="#battle" data-view="bitvy"><svg><use href="#i-knight"/></svg>Битва</a>
+  <a href="#fair" data-view="yarmarka"><svg><use href="#i-ship"/></svg>Ярмарка</a>
+  <a href="#victory" data-view="pobeda"><svg><use href="#i-crown"/></svg>Победа</a>
+  <button type="button" id="d-search"><svg><use href="#i-search"/></svg>Поиск</button>
+</nav>
 </div>
 
 <script>
@@ -1295,20 +1454,52 @@ if (typeof document !== 'undefined') (function () {
   /* navigation: one view at a time, routed on the hash */
   var views = $$('.view'), links = $$('#nav a');
   function show() {
-    var id = (location.hash || '').slice(1);
-    if (!document.getElementById(id) || !document.getElementById(id).classList.contains('view')) {
-      // allow links to tools inside a view
-      var el = id && document.getElementById(id), v = el && el.closest('.view');
-      id = v ? v.id : 'hod';
-    }
+    var raw = (location.hash || '').slice(1), target = raw ? document.getElementById(raw) : null;
+    var view = target ? (target.classList.contains('view') ? target : target.closest('.view')) : null;
+    if (!view) { view = document.getElementById('hod'); target = null; }
+    var id = view.id;
     views.forEach(function (v) { v.classList.toggle('on', v.id === id); });
     links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    if (!document.body.classList.contains('searching')) window.scrollTo(0, 0);
-    var cur = document.querySelector('#nav a[aria-current]'), nav = document.getElementById('nav');
-    if (cur && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = cur.offsetLeft - nav.offsetLeft - 12;
+    $$('#dock a').forEach(function (a) { if (a.dataset.view === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (document.body.classList.contains('searching')) return;
+    if (target && target !== view) target.scrollIntoView(); else window.scrollTo(0, 0);
   }
-  window.addEventListener('hashchange', function () { clearSearch(); show(); });
-  links.forEach(function (a) { a.addEventListener('click', function () { clearSearch(); if (location.hash === a.getAttribute('href')) show(); }); });
+  window.addEventListener('hashchange', function () { closeSheet(); clearSearch(); show(); });
+  links.concat($$('#dock a')).forEach(function (a) { a.addEventListener('click', function () { closeSheet(); clearSearch(); if (location.hash === a.getAttribute('href')) show(); }); });
+
+  /* phone: sections live in a sheet opened from the dock */
+  var dMenu = $('#d-menu');
+  function openSheet(focusSearch) { document.body.classList.add('sheet'); dMenu.setAttribute('aria-expanded', 'true'); if (focusSearch) q.focus(); }
+  function closeSheet() { document.body.classList.remove('sheet'); dMenu.setAttribute('aria-expanded', 'false'); }
+  dMenu.addEventListener('click', function () { if (document.body.classList.contains('sheet')) closeSheet(); else openSheet(false); });
+  $('#d-search').addEventListener('click', function () { openSheet(true); });
+  $('#sheet-x').addEventListener('click', closeSheet);
+  $('#qgo').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
+
+  /* view mode: phone or wide; automatic by width until the reader picks one */
+  var root = document.documentElement, modeSaved = store.get('mode', null);
+  if (modeSaved !== 'phone' && modeSaved !== 'wide') modeSaved = null;
+  function autoMode() { return window.innerWidth < 700 ? 'phone' : 'wide'; }
+  function setMode(m) {
+    root.dataset.mode = m;
+    $$('#mode button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.m === m)); });
+    var vp = document.querySelector('meta[name="viewport"]'), small = Math.min(screen.width, screen.height) < 700;
+    if (vp) vp.setAttribute('content', m === 'wide' && small ? 'width=980' : 'width=device-width, initial-scale=1');
+    if (m !== 'phone') closeSheet();
+  }
+  $$('#mode button').forEach(function (b) { b.addEventListener('click', function () { modeSaved = b.dataset.m; store.set('mode', modeSaved); setMode(modeSaved); }); });
+  window.addEventListener('resize', function () { if (!modeSaved) setMode(autoMode()); });
+
+  /* stacked tables on the phone need a label for every cell */
+  $$('table.st').forEach(function (t) {
+    var heads = $$('thead th', t).map(function (h) { return h.textContent.trim(); });
+    $$('tbody tr', t).forEach(function (tr) {
+      var cells = $$('th,td', tr);
+      cells.forEach(function (c, i) { if (i > 0 && heads[i]) c.setAttribute('data-label', heads[i]); });
+      if (cells.length > 1 && cells.slice(1).every(function (c) { return c.classList.contains('x'); })) tr.classList.add('allx');
+    });
+  });
 
   /* search: show every row that contains all typed words */
   var q = $('#q');
@@ -1329,8 +1520,12 @@ if (typeof document !== 'undefined') (function () {
       if (hit) any = true;
     });
     document.body.classList.toggle('none', on && !any);
+    $('#sbar').hidden = !on;
+    if (on) { $('#sbar-t').textContent = 'Показаны правила со словами: ' + q.value.trim(); window.scrollTo(0, 0); }
   }
   q.addEventListener('input', search);
+  q.addEventListener('keydown', function (e) { if (e.key === 'Enter') { closeSheet(); q.blur(); } });
+  $('#sbar-x').addEventListener('click', function () { clearSearch(); show(); });
 
   /* steppers */
   var stepVals = {};
@@ -1468,7 +1663,7 @@ if (typeof document !== 'undefined') (function () {
     };
     var borders = sel.map(function (v) { return { pawn: /^p\d$/.test(v) ? +v[1] : null, pirate: v === 'x' }; });
     var r = Rules.fair({ players: state.players, onCard: stepVals['f-card'] || 0, borders: borders, empires: rd.emp, initiator: init, bankruptcy: $('#f-bank').checked });
-    var h = '<label class="f"><span>Кто запускает ярмарку</span><select id="f-init">' + act.map(function (i) { return '<option value="' + i + '"' + (i === init ? ' selected' : '') + '>' + PL[i].n + '</option>'; }).join('') + '</select></label>';
+    var h = '<label class="f fs"><span>Кто запускает ярмарку</span><select id="f-init">' + act.map(function (i) { return '<option value="' + i + '"' + (i === init ? ' selected' : '') + '>' + PL[i].n + '</option>'; }).join('') + '</select></label>';
     rd.emp.forEach(function (e, i) {
       h += '<div class="rt emp' + (r.levies.indexOf(i) >= 0 ? ' lev' : '') + '">' + esc(e) + '</div>';
       if (i < nb) h += '<label class="rt bd' + (r.stop === i ? ' stop' : '') + '"><span>граница' + (r.stop === i ? ', здесь вояж обрывается' : '') + '</span><select data-b="' + i + '" id="f-b' + i + '">' + opts(sel[i]) + '</select></label>';
@@ -1543,6 +1738,7 @@ if (typeof document !== 'undefined') (function () {
   function renderVictory() { buildVictory(); calcVictory(); }
 
   /* ---------- start ---------- */
+  setMode(modeSaved || autoMode());
   bindSteppers(document, function () { renderFair(); });
   renderBattleFields();
   applyPlayers();
